@@ -39,5 +39,9 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
+        public IActionResult Upload()
+        {
+            return View();
+        }
     }
 }

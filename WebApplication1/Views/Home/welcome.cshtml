@@ -159,7 +159,7 @@
                         <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="upload.html"><i class="fa fa-fw fa-bar-chart-o"></i> Upload Audio</a>
+                        @Html.ActionLink("Upload Audio", "upload", "Home", null, new { @class = "fa fa-fw fa-bar-chart-o", @i = " Upload Audio" })
                     </li>
                     <li>
                         <a href="tables.html"><i class="fa fa-fw fa-table"></i> Record Audio</a>
@@ -170,7 +170,7 @@
                     
     
                     <li>
-                        <a href={{ url_for('home') }}><i class="fa fa-fw fa-desktop"></i> Log Out</a>
+                        @Html.ActionLink("Logout", "Index", "Home", null, new { @class = "fa fa-fw fa-desktop"})
                     </li>
 
                     </li>
