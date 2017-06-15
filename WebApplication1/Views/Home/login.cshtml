@@ -20,8 +20,8 @@
           request.form.username }}">
          <input type="password" placeholder="Password" name="password" value="{{
           request.form.password }}">
-        <input class="btn btn-default" type="submit" value="Login">
-         <p class="message">Not registered? <a href="welcome.html">Create an account</a></p>
+        <input class="btn btn-default" type="submit" value="Login"> <br />
+          Not Registered? @Html.ActionLink("Create a New Account", "welcome", "Home", null, new { @class = "message" })
       </form>
        {% if error %} 
         <p class="error"><strong>Error:</strong> {{ error }}
