@@ -173,8 +173,9 @@
                 <div class="col-xs-2"></div>
                 <div class="col-xs-4">
                     <p style="color: #ffffff;font-size: larger; padding-bottom: 20px">
-                        <a href="login.html"><button class="btn btn-block btn-primary btn-xlarge" style="border-radius: 30px; background-color:transparent; border-width:8px; border:#F4C678; border-style:solid; color:#F4C678; font-size:25px">LOGIN</button></a>
+                        @Html.ActionLink("LOGIN", "login", "Home", null, new { @class = "btn btn-block btn-primary btn-xlarge" , @style = "border-radius: 30px; background-color:transparent; border-width:8px; border:#F4C678; border-style:solid; color:#F4C678; font-size:25px" })
                     </p>
+                   <!--<a href="login.cshtml">-->
                     <br>
                 </div>
                 <div class="col-xs-4">

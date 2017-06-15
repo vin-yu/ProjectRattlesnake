@@ -9775,10 +9775,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sara Young\\Documents\\Visual Studio 2017\\Projects\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "C:\\Users\\Sara Young\\Documents\\ProjectRattlesnake\\WebApplication1\\WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "C:\\Users\\Sara Young\\Documents\\Visual Studio 2017\\Projects\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
-      "outputPath": "C:\\Users\\Sara Young\\Documents\\Visual Studio 2017\\Projects\\WebApplication1\\WebApplication1\\obj\\",
+      "projectPath": "C:\\Users\\Sara Young\\Documents\\ProjectRattlesnake\\WebApplication1\\WebApplication1.csproj",
+      "outputPath": "C:\\Users\\Sara Young\\Documents\\ProjectRattlesnake\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
