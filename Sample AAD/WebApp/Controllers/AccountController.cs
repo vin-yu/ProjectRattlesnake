@@ -18,13 +18,17 @@ namespace WebApp.Controllers
             {
                 HttpContext.GetOwinContext().Authentication.Challenge(new AuthenticationProperties { RedirectUri = "/" }, OpenIdConnectAuthenticationDefaults.AuthenticationType);
             }
+            else
+            {
+                Response.Redirect("/Home/Welcome/");
+            }
         }
         
         public void SignOut()
         {
             // Send an OpenID Connect sign-out request.
             HttpContext.GetOwinContext().Authentication.SignOut(OpenIdConnectAuthenticationDefaults.AuthenticationType, CookieAuthenticationDefaults.AuthenticationType);
-            //Response.Redirect("/");
+            Response.Redirect("/");
         }
 	}
 }
