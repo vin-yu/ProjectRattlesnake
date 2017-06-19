@@ -1,0 +1,526 @@
+﻿
+@if (Request.IsAuthenticated)
+{
+    Response.BufferOutput = true;
+    Response.Redirect("https://localhost:44326/Home/Welcome/");
+}
+
+    <div class="navbar navbar-default navbar-fixed-top trans-before" role="navigation" style="margin-left: 0px;">
+
+        <div class="container">
+
+            <div class="navbar-header">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+
+                    <span class="sr-only">Toggle navigation</span>
+
+                    <span class="icon-bar"></span>
+
+                    <span class="icon-bar"></span>
+
+                    <span class="icon-bar"></span>
+
+                </button>
+
+                <a class="navbar-brand" href="home"><img style="height: 200%; margin-top: -16px; margin-left: 0px" src="~/Content/img/Logos/light_logo_text.png"></a>
+
+            </div>
+
+
+
+            <div class="navbar-collapse collapse">
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li><a href="#about">ABOUT</a></li>
+
+                    <li><a href="#features">FEATURES</a></li>
+
+                    <li><a href="#technology">TECHNOLOGY</a></li>
+
+                    <li><a href="#team">TEAM</a></li>
+
+                    <li>
+                        @Html.Partial("_LoginPartial")
+                    </li>
+
+                    <li>
+                        <a href="signup">
+                            <p style="color: #ffffff;font-size: larger; margin-top:-8px; margin-bottom:-32px">
+                                <button class="btn btn-block btn-primary" style="background-color:transparent; border-width:4px; border:#E8284D; border-style:solid; color:#E8284D">SIGN UP</button>
+                            </p>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div><!--/.nav-collapse -->
+
+        </div>
+
+    </div><!--.navbar-default-->
+
+    <div class="one-page-static-wrap parallax" data-stellar-background-ratio="0.5">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="span4"></div>
+
+                <div class="span4">
+
+                    <img class="center-block" height="80px" src="~/Content/img/Logos/light_logo.png" style="max-width: 90%; margin-top: 150px; margin-bottom: 20px">
+
+                </div>
+
+                <div class="span4"></div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-xs-12">
+
+                    <h1 class="text-center" style="margin-bottom: -1px"><font color="#fff" size="7rem">LET US WRITE IT DOWN </font></h1>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-xs-12">
+
+                    <h4 class="text-center" style="margin-bottom: 40px">
+
+                        <font color="#fff">
+
+                            <br>Meeting notes have never been so easy.
+
+                        </font>
+
+                    </h4>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-4">
+                    <p style="color: #ffffff;font-size: larger; padding-bottom: 200px">
+                        <a href="@Url.Action("SignIn", "Account")" title="Sign in"><button class="btn btn-block btn-primary btn-xlarge" style="border-radius: 30px; background-color:transparent; border-width:8px; border:#F4C678; border-style:solid; color:#F4C678; font-size:25px">LOGIN</button></a>
+                    </p>
+                    <br>
+                </div>
+                <div class="col-xs-4">
+                    <p style="color: #ffffff;font-size: larger; padding-bottom: 200px">
+                        <a href="signup"><button class="btn btn-block btn-primary btn-xlarge" style="border-radius: 30px; background-color:transparent; border-width:8px; border:#E8284D; border-style:solid;color:#E8284D; font-size:25px">SIGN UP</button></a>
+                    </p>
+                    <br>
+                </div>
+                <div class="col-xs-2"></div>
+            </div>
+            <div class="row">
+                <center><img src="~/Content/img/down_arrows.png" style="width: 3%; margin-bottom:16px"></center>
+            </div>
+
+        </div>
+
+    </div><!--static wrapper-->
+
+    <section id="about" class="padding-80">
+
+        <div class="container">
+
+            <div class="row">
+
+
+
+                <div class="col-md-6">
+
+                    <img src="~/Content/img/Landing/landing_pictures/landing_picture_1.png" style="width: 100%; align-self: centre">
+
+                </div>
+                <div class="col-md-6">
+
+                    <p class="wow animated fadeInRight" ; style="color: #E8284D; font-size:30px; margin-top:25%">
+
+                        Focus on the conversation.
+                    </p>
+
+                    <br>
+                    <p class="wow animated fadeInRight" ; style="color: #000">
+
+                        Don't worry about multitasking during an important idea.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div><!--intro and skills-->
+
+    </section>
+
+
+
+    <section class="padding-80 parallax" data-stellar-background-ratio="0.5" style="background: url(Content/img/spacing_picture_2.png);background-size:cover; background-position: center top; padding: 130px"></section>
+
+    <section class="padding-80">
+
+        <div class="container">
+
+            <div class="row">
+
+
+
+                <div class="col-md-6">
+
+                    <p class="wow animated fadeInLeft" ; style="color: #E8284D; font-size:30px; margin-top:25%">
+
+                        Manual notes are so yesterday.
+                    </p>
+
+                    <br>
+                    <p class="wow animated fadeInLeft" ; style="color: #000">
+
+                        Generate accurate automatic meeting transcripts from audio recordings.
+
+                    </p>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <img src="~/Content/img/Landing/landing_pictures/landing_picture_2.png" style="width: 100%; align-self: centre">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="padding-80 parallax" data-stellar-background-ratio="0.5" style="background: url(Content/img/spacing_picture_3.png);background-size:cover; background-position: center top; padding: 130px"></section>
+
+
+    <section id="features" class="padding-80">
+
+        <div class="container">
+
+            <div class="row">
+
+
+
+                <div class="col-xs-2">
+
+                    <img src="~/Content/img/Landing/landing_pictures/skype_logo.png" style="width: 100%; align-self: centre">
+
+                </div>
+                <div class="col-xs-2">
+
+                    <img src="~/Content/img/Landing/landing_pictures/onenote_logo.png" style="width: 100%; align-self: centre">
+
+                </div>
+                <div class="col-xs-2">
+
+                    <img src="~/Content/img/Landing/landing_pictures/outlook_logo.png" style="width: 100%; align-self: centre">
+
+                </div>
+                <div class="col-xs-6">
+
+                    <p class="wow animated fadeInRight" ; style="color: #E8284D; font-size:30px; margin-top:7%">
+
+                        Connect to your accounts.
+                    </p>
+
+                    <br>
+                    <p class="wow animated fadeInRight" ; style="color: #000">
+
+                        Use recorded conversations from Skype,
+                        and export transcripts to OneNote.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="padding-80 parallax" data-stellar-background-ratio="0.5" style="background: url(Content/img/spacing_picture_4.png);background-size:cover; background-position: center top; padding: 130px"></section>
+
+
+    <section id="technology" class="padding-80">
+
+        <div class="container">
+
+            <div class="row">
+
+
+
+                <div class="col-md-6">
+
+                    <p class="wow animated fadeInLeft" ; style="color: #E8284D; font-size:30px; margin-top:25%">
+
+                        Built on Flask.
+                    </p>
+
+                    <br>
+                    <p class="wow animated fadeInLeft" ; style="color: #000">
+
+                        Lightweight, yet powerful.
+
+                    </p>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <img src="~/Content/img/Landing/landing_pictures/flask_logo.png" style="width: 100%; align-self: centre">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="padding-80 parallax" data-stellar-background-ratio="0.5" style="background: url(Content/img/spacing_picture_5.png);background-size:cover; background-position: center top; padding: 130px"></section>
+
+    <section class="padding-80">
+
+        <div class="container">
+
+            <div class="row">
+
+
+
+                <div class="col-md-6">
+
+                    <img src="~/Content/img/Landing/landing_pictures/ibm_watson.png" style="width: 100%; align-self: centre">
+
+                </div>
+                <div class="col-md-6">
+
+                    <p class="wow animated fadeInRight" ; style="color: #E8284D; font-size:30px; margin-top:25%">
+
+                        Powered by IBM Watson.
+                    </p>
+
+                    <br>
+                    <p class="wow animated fadeInRight" ; style="color: #000">
+
+                        Accurate transcription with speaker differentiation.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="padding-80 parallax" data-stellar-background-ratio="0.5" style="background: url(Content/img/spacing_picture_6.png);background-size:cover; background-position: center top; padding: 130px"></section>
+
+    <section id="team" class="padding-80">
+
+        <div class="container">
+
+            <div class="row">
+
+
+
+                <div class="col-md-6">
+
+                    <p class="wow animated fadeInLeft" ; style="color: #E8284D; font-size:30px; margin-top:25%">
+
+                        Made by Microsoft Interns.
+                    </p>
+
+                    <br>
+                    <p class="wow animated fadeInLeft" ; style="color: #000">
+
+                        The best interns.
+
+                    </p>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <img src="~/Content/img/Landing/landing_pictures/interns.png" style="width: 100%; align-self: centre">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="padding-80 parallax" data-stellar-background-ratio="0.5" style="background: url(Content/img/spacing_picture_7.png);background-size:cover; background-position: center top; padding: 130px"></section>
+
+    <section class="padding-80">
+
+        <div class="container">
+
+            <div class="row">
+
+
+
+                <div class="col-xs-1">
+
+                    <img src="~/Content/img/Landing/landing_pictures/travis.png" style="width: 100%; align-self: centre;">
+
+                </div>
+
+                <div class="col-xs-1">
+
+                    <img src="~/Content/img/Landing/landing_pictures/anna.png" style="width: 100%; align-self: centre">
+
+                </div>
+                <div class="col-xs-1">
+
+                    <img src="~/Content/img/Landing/landing_pictures/tara.png" style="width: 100%; align-self: centre">
+
+                </div>
+                <div class="col-xs-1">
+
+                    <img src="~/Content/img/Landing/landing_pictures/luis.png" style="width: 100%; align-self: centre">
+
+                </div>
+                <div class="col-xs-1">
+
+                    <img src="~/Content/img/Landing/landing_pictures/vin.png" style="width: 100%; align-self: centre">
+
+                </div>
+                <div class="col-xs-6">
+
+                    <p class="wow animated fadeInRight" ; style="color: #E8284D; font-size:30px;">
+
+                        Some other cool individuals.
+                    </p>
+
+                    <br>
+                    <p class="wow animated fadeInRight" ; style="color: #000">
+
+                        Our manager and mentors.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="padding-80 parallax" data-stellar-background-ratio="0.5" style="background: url(Content/img/spacing_picture_8.png);background-size:cover; background-position: center top; padding: 130px"></section>
+
+    <section id="contact-text" class="padding-80 parallax" data-stellar-background-ratio="0.5" style="background: #000;background-size:cover; background-position: center center">
+
+        <div class="container text-center text-uppercase">
+
+            <h1>Try Project Rattlesnake now!</h1>
+
+            <br>
+
+            <div class="row">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-4">
+                    <p style="color: #ffffff;font-size: larger; padding-bottom: 20px">
+                        @Html.ActionLink("LOGIN", "login", "Home", null, new { @class = "btn btn-block btn-primary btn-xlarge", @style = "border-radius: 30px; background-color:transparent; border-width:8px; border:#F4C678; border-style:solid; color:#F4C678; font-size:25px" })
+                    </p>
+                    <br>
+                </div>
+                <div class="col-xs-4">
+                    <p style="color: #ffffff;font-size: larger; padding-bottom: 80px">
+                        <a href="signup"><button class="btn btn-block btn-primary btn-xlarge" style="border-radius: 30px; background-color:transparent; border-width:8px; border:#E8284D; border-style:solid;color:#E8284D; font-size:25px">SIGN UP</button></a>
+                    </p>
+                    <br>
+                </div>
+                <div class="col-xs-2"></div>
+            </div>
+
+        </div>
+
+    </section><!--contact text-->
+
+    <footer id="footer">
+
+        <div class="container">
+
+
+
+            <div class="row">
+
+                <div class="col-xs-12">
+                    <div class="span4">
+
+                        <img class="center-block" height="30px" src="~/Content/img/Logos/page_bottom_logo_text.png" style="max-width: 90%; margin-top: 150px; margin-bottom: 20px">
+
+                    </div>
+
+                </div>
+                <ul class="nav navbar-nav navbar-center">
+
+                    <li><a href="#about">ABOUT</a></li>
+
+                    <li><a href="#features">FEATURES</a></li>
+
+                    <li><a href="#technology">TECHNOLOGY</a></li>
+
+                    <li><a href="#team">TEAM</a></li>
+
+                    <li>
+                        <a href="login">
+                            <p style="color: #ffffff;font-size: larger; margin-top:-8px; margin-bottom:-32px">
+                                <button class="btn btn-block btn-primary" style="background-color:transparent; border-width:4px; border:#F4C678; border-style:solid; color:#F4C678">LOGIN</button>
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#signup">
+                            <p style="color: #ffffff;font-size: larger; margin-top:-8px; margin-bottom:-32px">
+                                <button class="btn btn-block btn-primary" style="background-color:transparent; border-width:4px; border:#E8284D; border-style:solid; color:#E8284D">SIGN UP</button>
+                            </p>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div><!--footer btm-->
+
+        </div>
+
+    </footer><!--footer end-->
+
+
+
+
+
+    
+
