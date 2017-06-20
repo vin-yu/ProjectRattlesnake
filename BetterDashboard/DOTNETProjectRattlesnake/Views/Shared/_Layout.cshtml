@@ -1,0 +1,199 @@
+﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ProjectRattlesnake - @ViewData["Title"] - </title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.css" rel="stylesheet">
+    <!-- Dropzone.js -->
+    <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+</head>
+<body>
+    <body class="nav-md">
+        <div class="container body">
+            <div class="main_container">
+                <div class="col-md-3 left_col" style="background:#071033;">
+                    <div class="left_col scroll-view" style="background:#071033;">
+                        <center>
+                            <div class="row" style="background:transparent; width:100%">
+
+                                <a href="index.html">
+                                    <img src="~/images/light_logo_text.png" style="width:90%; margin-top:10px;margin-bottom:10px;">
+                                </a>
+
+                            </div>
+                        </center>
+                        
+    <br />
+    <!-- sidebar menu -->
+    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+        <div class="menu_section">
+            <ul class="nav side-menu">
+                <li style="text-transform:uppercase">
+                    <a asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i> Home </a>
+                </li>
+                <li style="text-transform:uppercase">
+                    <a asp-area="" asp-controller="Home" asp-action="Upload"><i class="fa fa-upload"></i> Upload a Recording</a>
+                </li>
+                <li style="text-transform:uppercase">
+                    <a asp-area="" asp-controller="Home" asp-action="Record"><i class="fa fa-video-camera"></i> Record a Meeting </a>
+                </li>
+                <li style="text-transform:uppercase">
+                    <a asp-area="" asp-controller="Home" asp-action="Transcripts"><i class="fa fa-file"></i> My Transcripts </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+
+    </div>
+
+    <!-- /sidebar menu -->
+    <!-- menu profile quick info -->
+    <!-- /menu profile quick info -->
+    <!-- /menu footer buttons -->
+    <div class="sidebar-footer hidden-small"  style="background:#071033;">
+        <div class="col-md-5" style="margin-bottom:20px">
+            <img src="images/img.jpg" alt="Your profile picture." style="border-radius:50%; width:90%; margin-left:5px; margin-right:5px; margin-top:-5px">
+        </div>
+        <div class="col-md-5" style="margin-bottom:-20px">
+            <p style="text-transform:uppercase; color:#fff; font-size:12px; margin:0px">Firstname Lastname</p>
+            <p style="text-transform:uppercase; color:#8db3ff; font-size:8px; margin:0px">Role</p>
+            <p style="text-transform:uppercase; color:#8db3ff; font-size:8px; margin:0px">Organization</p>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+            <a style="width:inherit ;" asp-area="" asp-controller="Home" asp-action="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true" style="display:inline-block; margin-left:-10px;"> <p style="display:inline-block;text-transform:uppercase; margin-left:0px; font-family: sans-serif; font-size:13px">Account Settings</p></span>
+            </a>
+        </div>
+    <!-- /menu footer buttons -->
+</div>
+                </div>
+                <!-- top navigation -->
+                <div class="top_nav" style="background:#fff;">
+                    <div class="nav_menu" style="background:#fff;">
+                        <nav>
+                            <div class="nav toggle">
+                                <a id="menu_toggle"><i class="fa fa-bars" style="color:#071033"></i></a>
+                            </div>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="">
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <img src="images/img.jpg" alt="">John Doe
+                                        <span class=" fa fa-angle-down"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                        <li><a href="javascript:;"> Profile</a></li>
+                                        <li><a href="javascript:;">Help</a></li>
+                                        <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    </ul>
+                                </li>
+                                <li role="presentation" class="dropdown">
+                                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-bell style="color:#071033"></i>
+                                        <span class="badge" style="background:#E8284D">6</span>
+                                    </a>
+                                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                        <li>
+                                            <ul class="nav navbar-right panel_toolbox">
+                                                <li>
+                                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                                </li>
+                                            </ul>
+                                            <a>
+                                                    <span>John Smith</span>
+                                                    <span class="time">3 mins ago</span>
+                                                </span>
+                                                <span class="message">
+                                                    Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!-- /top navigation -->
+                <!-- page content -->
+                <div class="right_col" role="main" style="background:#e5edf9;">
+                    @RenderBody()
+                </div>
+            </div>
+            <!-- jQuery -->
+            <script src="../vendors/jquery/dist/jquery.min.js"></script>
+            <!-- Bootstrap -->
+            <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+            <!-- FastClick -->
+            <script src="../vendors/fastclick/lib/fastclick.js"></script>
+            <!-- NProgress -->
+            <script src="../vendors/nprogress/nprogress.js"></script>
+            <!-- Chart.js -->
+            <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+            <!-- gauge.js -->
+            <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
+            <!-- bootstrap-progressbar -->
+            <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+            <!-- iCheck -->
+            <script src="../vendors/iCheck/icheck.min.js"></script>
+            <!-- Skycons -->
+            <script src="../vendors/skycons/skycons.js"></script>
+            <!-- Flot -->
+            <script src="../vendors/Flot/jquery.flot.js"></script>
+            <script src="../vendors/Flot/jquery.flot.pie.js"></script>
+            <script src="../vendors/Flot/jquery.flot.time.js"></script>
+            <script src="../vendors/Flot/jquery.flot.stack.js"></script>
+            <script src="../vendors/Flot/jquery.flot.resize.js"></script>
+            <!-- Flot plugins -->
+            <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+            <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+            <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
+            <!-- DateJS -->
+            <script src="../vendors/DateJS/build/date.js"></script>
+            <!-- JQVMap -->
+            <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
+            <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+            <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+            <!-- bootstrap-daterangepicker -->
+            <script src="../vendors/moment/min/moment.min.js"></script>
+            <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+            <!-- Custom Theme Scripts -->
+            <script src="../build/js/custom.min.js"></script>
+            <!-- Dropzone.js -->
+            <script src="../vendors/dropzone/dist/min/dropzone.min.js"></script>
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
