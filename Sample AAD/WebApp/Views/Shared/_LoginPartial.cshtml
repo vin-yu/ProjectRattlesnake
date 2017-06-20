@@ -1,0 +1,13 @@
+﻿
+<ul class="nav navbar-nav navbar-right">
+    @*<li><img src="~/Content/microsoft.png" style="max-width: 30px;max-height: 30px; display:block; vertical-align:bottom" /></li>
+    <li> @Html.ActionLink("Sign in", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+    <li>
+        <a href="@Url.Action("SignIn", "Account")" title="Sign in">
+            <p style="color: #ffffff;font-size: larger; margin-top:-8px; margin-bottom:-32px">
+                <button class="btn btn-block btn-primary" style="background-color:transparent; border-width:4px; border:#F4C678; border-style:solid; color:#F4C678">LOGIN</button>
+            </p>
+        </a>
+    </li>
+
+</ul>
