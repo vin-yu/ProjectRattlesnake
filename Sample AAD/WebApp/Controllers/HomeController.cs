@@ -38,6 +38,36 @@ namespace WebApp.Controllers
         }
 
         [Authorize]
+        public async Task<ActionResult> Upload()
+        {
+            ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
+            return View();
+        }
+
+        [Authorize]
+        public async Task<ActionResult> Record()
+        {
+            ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
+            return View();
+        }
+
+        [Authorize]
+        public async Task<ActionResult> Settings()
+        {
+            ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
+            return View();
+        }
+
+        [Authorize]
+        public async Task<ActionResult> Transcripts()
+        {
+            ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
+            return View();
+        }
+
+
+        /* 
+        [Authorize]
         public async Task<ActionResult> About()
         {
             ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
@@ -197,5 +227,7 @@ namespace WebApp.Controllers
                 new AuthenticationProperties { RedirectUri = "/Home/ReadMail" },
                 OpenIdConnectAuthenticationDefaults.AuthenticationType);
         }
+        */
     }
+    
 }
