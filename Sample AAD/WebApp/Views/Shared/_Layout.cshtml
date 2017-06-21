@@ -1,9 +1,4 @@
 ﻿<!DOCTYPE html>
-
-@{
-    ViewBag.website = "Index";
-}
-
 <html>
 <head>
     <meta charset="utf-8" />
@@ -14,6 +9,11 @@
     {
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/jquery")
+    }
+    @if(ViewBag.website == "Dashboard")
+    {
+        @Styles.Render("~/Content/Dashboard/css")
+        @Scripts.Render("~/bundles/Dashboard/jquery")
     }
 </head>
 <body>
