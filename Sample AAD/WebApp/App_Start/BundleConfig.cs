@@ -73,7 +73,8 @@ namespace WebApp
                       "~/Content/Dashboard/bootstrap-progressbar-3.3.4.min.css",
                       "~/Content/Dashboard/jqvmap.min.css",
                       "~/Content/Dashboard/daterangepicker.css",
-                      "~/Content/Dashboard/custom.css"));
+                      "~/Content/Dashboard/custom.css",
+                      "~/Content/Dashboard/dropzone.css"));
         }
     }
 }

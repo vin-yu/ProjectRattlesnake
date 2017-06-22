@@ -16,6 +16,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Web.UI.WebControls;
+
 
 namespace WebApp.Controllers
 {
@@ -65,6 +67,11 @@ namespace WebApp.Controllers
             return View();
         }
 
+        [Authorize]
+        public async Task<ActionResult> UploadFile()
+        {
+            return null;
+        }
 
         /* 
         [Authorize]
@@ -228,6 +235,9 @@ namespace WebApp.Controllers
                 OpenIdConnectAuthenticationDefaults.AuthenticationType);
         }
         */
+
+
     }
     
 }
+
