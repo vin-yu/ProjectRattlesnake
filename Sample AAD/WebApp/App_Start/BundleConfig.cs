@@ -74,7 +74,9 @@ namespace WebApp
                       "~/Content/Dashboard/jqvmap.min.css",
                       "~/Content/Dashboard/daterangepicker.css",
                       "~/Content/Dashboard/custom.css",
+                      "~/Content/Dashboard/style1.css",
                       "~/Content/Dashboard/dropzone.css"));
+
         }
     }
 }
