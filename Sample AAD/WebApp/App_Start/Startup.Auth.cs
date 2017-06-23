@@ -16,6 +16,7 @@ using Microsoft.Identity.Client;
 using System.IdentityModel.Claims;
 using WebApp_OpenIDConnect_DotNet.Models;
 using WebApp.Utils;
+using Microsoft.IdentityModel.Tokens;
 
 namespace WebApp
 {
@@ -52,7 +53,7 @@ namespace WebApp
                     RedirectUri = redirectUri,                    
                     Scope = "openid email profile",
                     PostLogoutRedirectUri = redirectUri,
-                    TokenValidationParameters = new TokenValidationParameters
+                    TokenValidationParameters = new System.IdentityModel.Tokens.TokenValidationParameters
                     {
                         ValidateIssuer = false,
                         // In a real application you would use IssuerValidator for additional checks, like making sure the user's organization has signed up for your app.

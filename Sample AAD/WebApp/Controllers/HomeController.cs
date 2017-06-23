@@ -1,4 +1,5 @@
 ﻿using Microsoft.Identity.Client;
+using System.Configuration;
 using Microsoft.IdentityModel.Protocols;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,6 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.RetryPolicies;
 using Microsoft.WindowsAzure;
 using Microsoft.Azure;
-using System.Configuration;
 
 using System;
 using System.Collections.Generic;
@@ -47,7 +47,6 @@ using System.Security.Cryptography;
 using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
