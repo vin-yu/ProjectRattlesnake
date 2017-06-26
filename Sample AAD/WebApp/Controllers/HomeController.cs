@@ -1,5 +1,4 @@
 ﻿using Microsoft.Identity.Client;
-using System.Configuration;
 using Microsoft.IdentityModel.Protocols;
 using System;
 using System.Collections.Generic;
@@ -37,7 +36,8 @@ using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.RetryPolicies;
 using Microsoft.WindowsAzure;
-using Microsoft.Azure;
+
+using System.Configuration;
 
 using System;
 using System.Collections.Generic;
@@ -47,6 +47,7 @@ using System.Security.Cryptography;
 using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -66,7 +67,7 @@ using Microsoft.WindowsAzure.Storage.RetryPolicies;
 
 namespace WebApp.Controllers
 {
-
+    using Microsoft.Azure;
     public class HomeController : Controller
     {
         public static string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
@@ -604,6 +605,7 @@ namespace WebApp.Controllers
     /// using System;
     public static class Common
     {
+
         /// <summary>
         /// Validates the connection string information in app.config and throws an exception if it looks like 
         /// the user hasn't updated this to valid values. 
