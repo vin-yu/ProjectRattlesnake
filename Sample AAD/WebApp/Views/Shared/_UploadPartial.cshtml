@@ -36,42 +36,18 @@
 
 
                                     <div class="col-xs-7">
-                                        <input id="file" type="file" runat="server" name="file">
+                                        <input id="file" type="file" name="file">
                                     </div>
 
 
 
                                 </div>
 
-                                <form id="form1" runat="server" name="form1">
-                                    <div>
-                                        <h4>Select a file to upload:</h4>
-
-                                        <asp:FileUpload id="FileUpload1"
-                                                        runat="server"
-                                                        name="FileUpload1">
-                                        </asp:FileUpload>
-
-                                        <br /><br />
-
-                                        <asp:Button id="UploadButton"
-                                                    Text="Upload file"
-                                                    OnClick="UploadButton_Click"
-                                                    runat="server"></asp:Button>
-
-                                        <hr />
-
-                                        <asp:Label id="UploadStatusLabel"
-                                                   runat="server">
-                                        </asp:Label>
-                                    </div>
-                                </form>
-
-                                
+    
 
                                 <div class="col-xs-12" style="padding: 10px;">
                                     <div class="col-xs-4">
-                                        <input type="submit" value="Upload" id="ajaxUploadButton" class="btn" OnClick="UploadThis" runat="client">
+                                        <input type="submit" value="Upload" id="ajaxUploadButton" class="btn">
 </div>
                                     <div class="col-xs-7">
 

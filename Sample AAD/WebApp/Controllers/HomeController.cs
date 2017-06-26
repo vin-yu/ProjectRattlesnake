@@ -114,34 +114,36 @@ namespace WebApp.Controllers
             return View();
         }
 
-        
+
         [Authorize]
-              public async Task<ActionResult> UploadFile()
+        public async Task<ActionResult> UploadFile()
         {
             // Retrieve storage account from connection string.
             //HtmlInputFile filMyFile;
-            
-     
+
+
             //UploadThis();
-            string myfilestr = Request.Form["filMyFile"];
+            string myfilestr = Request.Form["file"];
+            Debug.WriteLine("file: " + myfilestr);
 
+            var myFile = Request.Files["file"];
 
-            HttpPostedFile myFile;
-
-        //myFile = filMyFile.PostedFile;
-        //string strFilename = Path.GetFileName(myFile.FileName);
+            myfilestr = myFile.FileName;
+            Debug.WriteLine(myfilestr);
+            //myFile = filMyFile.PostedFile;
+            //string strFilename = Path.GetFileName(myFile.FileName);
 
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
         CloudConfigurationManager.GetSetting("StorageConnectionString"));
 
-        // Create the blob client.
-        CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+            // Create the blob client.
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
-        // Retrieve reference to a previously created container.
-        CloudBlobContainer container = blobClient.GetContainerReference("container");
+            // Retrieve reference to a previously created container.
+            CloudBlobContainer container = blobClient.GetContainerReference("container");
 
-        // Retrieve reference to a blob named "myblob".
-        CloudBlockBlob blockBlob = container.GetBlockBlobReference("victest");
+            // Retrieve reference to a blob named "myblob".
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference("victest");
 
             // Create or overwrite the "myblob" blob with contents from a local file.
             using (var fileStream = System.IO.File.OpenRead(@myfilestr))
@@ -149,13 +151,13 @@ namespace WebApp.Controllers
                 blockBlob.UploadFromStream(fileStream);
             }
 
-        Debug.WriteLine("All done. Press any key to finish...");
+            Debug.WriteLine("All done. Press any key to finish...");
 
             return View("Upload");
         }
-       
+
         protected void UploadThis()
-        { 
+        {
             string PcId = Request.Form["PcId"];
 
             var nameBox = Request.Files["file"];
@@ -164,32 +166,32 @@ namespace WebApp.Controllers
             string fileName = Path.GetFileName(nameBox.FileName);
 
 
-            
 
-       //     // Create or overwrite the "myblob" blob with contents from a local file.
-       //     //using (var fileStream = System.IO.File.OpenRead(@strFilename))
-       //     //{
-       //     if (FileUpload1.HasFile)
-       //     {
-       //         // Get the name of the file to upload.
-       //         string fileName = FileUpload1.FileName;
-       //         CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-       //CloudConfigurationManager.GetSetting("StorageConnectionString"));
 
-       //         // Create the blob client.
-       //         CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+            //     // Create or overwrite the "myblob" blob with contents from a local file.
+            //     //using (var fileStream = System.IO.File.OpenRead(@strFilename))
+            //     //{
+            //     if (FileUpload1.HasFile)
+            //     {
+            //         // Get the name of the file to upload.
+            //         string fileName = FileUpload1.FileName;
+            //         CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+            //CloudConfigurationManager.GetSetting("StorageConnectionString"));
 
-       //         // Retrieve reference to a previously created container.
-       //         CloudBlobContainer container = blobClient.GetContainerReference("container");
+            //         // Create the blob client.
+            //         CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
-       //         // Retrieve reference to a blob named "myblob".
-       //         CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
+            //         // Retrieve reference to a previously created container.
+            //         CloudBlobContainer container = blobClient.GetContainerReference("container");
 
-       //         blockBlob.UploadFromStream(FileUpload1);
-       //     }
-       //     //}
+            //         // Retrieve reference to a blob named "myblob".
+            //         CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
 
-       //     Debug.WriteLine("All done. Press any key to finish...");
+            //         blockBlob.UploadFromStream(FileUpload1);
+            //     }
+            //     //}
+
+            //     Debug.WriteLine("All done. Press any key to finish...");
 
         }
 
@@ -203,7 +205,7 @@ namespace WebApp.Controllers
         //// Page blob basics
         //Console.WriteLine("\nPage Blob Sample");
         //BasicStoragePageBlobOperationsAsync().Wait();
-        
+
 
 
 
@@ -315,50 +317,51 @@ namespace WebApp.Controllers
 
 
 
-
-    public partial class DefaultPage : System.Web.UI.Page
-    {
-
-
-        protected void UploadButton_Click(object sender, EventArgs e)
+        /*
+        public partial class DefaultPage : System.Web.UI.Page
         {
-            // Specify the path on the server to
-            // save the uploaded file to.
-            String savePath = @"c:\temp\uploads\";
-            FileUpload FileUpload1 = (FileUpload)form1.FindControl("FileUpload1");
-            // Before attempting to perform operations
-            // on the file, verify that the FileUpload 
-            // control contains a file.
-            if (FileUpload1.HasFile)
+
+
+            protected void UploadButton_Click(object sender, EventArgs e)
             {
-                // Get the name of the file to upload.
-                String fileName = FileUpload1.FileName;
+                // Specify the path on the server to
+                // save the uploaded file to.
+                String savePath = @"c:\temp\uploads\";
+                FileUpload FileUpload1 = (FileUpload)form1.FindControl("FileUpload1");
+                // Before attempting to perform operations
+                // on the file, verify that the FileUpload 
+                // control contains a file.
+                if (FileUpload1.HasFile)
+                {
+                    // Get the name of the file to upload.
+                    String fileName = FileUpload1.FileName;
 
-                // Append the name of the file to upload to the path.
-                savePath += fileName;
+                    // Append the name of the file to upload to the path.
+                    savePath += fileName;
 
 
-                // Call the SaveAs method to save the 
-                // uploaded file to the specified path.
-                // This example does not perform all
-                // the necessary error checking.               
-                // If a file with the same name
-                // already exists in the specified path,  
-                // the uploaded file overwrites it.
-                FileUpload1.SaveAs(savePath);
+                    // Call the SaveAs method to save the 
+                    // uploaded file to the specified path.
+                    // This example does not perform all
+                    // the necessary error checking.               
+                    // If a file with the same name
+                    // already exists in the specified path,  
+                    // the uploaded file overwrites it.
+                    FileUpload1.SaveAs(savePath);
 
-                // Notify the user of the name of the file
-                // was saved under.
+                    // Notify the user of the name of the file
+                    // was saved under.
+
+                }
+                else
+                {
+                    // Notify the user that a file was not uploaded.
+
+                }
 
             }
-            else
-            {
-                // Notify the user that a file was not uploaded.
-
-            }
-
-        }
-    }
+        }*/
 
 
     }
+}
