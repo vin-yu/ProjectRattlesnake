@@ -115,15 +115,35 @@ namespace WebApp.Controllers
         [Authorize]
         public async Task<ActionResult> UploadFile()
         {
-             // Block blob basics
-            Console.WriteLine("Block Blob Sample");
-            BasicStorageBlockBlobOperationsAsync().Wait();
+            // Retrieve storage account from connection string.
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+                CloudConfigurationManager.GetSetting("StorageConnectionString"));
 
-            // Block Blobs basics using Account SAS
+            // Create the blob client.
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
-            // Page blob basics
-            Console.WriteLine("\nPage Blob Sample");
-            BasicStoragePageBlobOperationsAsync().Wait();
+            // Retrieve reference to a previously created container.
+            CloudBlobContainer container = blobClient.GetContainerReference("container");
+
+            // Retrieve reference to a blob named "myblob".
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference("meeting.wav");
+
+            // Create or overwrite the "myblob" blob with contents from a local file.
+            using (var fileStream = System.IO.File.OpenRead(@"C:\Users\Victoria Cheng\ProjectRattlesnake\SARA_website_stuff\VIDEOS\test.wav"))
+            {
+                blockBlob.UploadFromStream(fileStream);
+            }
+
+
+            // // Block blob basics
+            //Console.WriteLine("Block Blob Sample");
+            //BasicStorageBlockBlobOperationsAsync().Wait();
+
+            //// Block Blobs basics using Account SAS
+
+            //// Page blob basics
+            //Console.WriteLine("\nPage Blob Sample");
+            //BasicStoragePageBlobOperationsAsync().Wait();
 
 
 
@@ -199,42 +219,42 @@ namespace WebApp.Controllers
 
 
 
-                    // INSERT demo
-                    //Debug.Write("Inserting a new row into table, press any key to continue...");
+            // INSERT demo
+            //Debug.Write("Inserting a new row into table, press any key to continue...");
 
-                    //string Name = "CARLOS";
-                    //sql.Clear();
-                    //sql.Append("ALTER DATABASE[" + DatabaseName + "]");
-                    //sql.Append("ADD FILE");
-                    //sql.Append("(");
-                    //sql.Append("NAME = N'" + Name + "',  ");
-                    //sql.Append("FILENAME = N'C:\\Rattlesnake\\" + Name + "',  ");
-                    //sql.Append("MAXSIZE = 100MB");
-                    //sql.Append(")  ");
-                    //sql.Append("TO FILEGROUP[FS];");
-                    //sqlcommand = sql.ToString();
-                    //using (SqlCommand command = new SqlCommand(sqlcommand, connection))
-                    //{
-                    //    int rowsAffected = command.ExecuteNonQuery();
-                    //    Debug.WriteLine(rowsAffected + " row(s) inserted");
-                    //}
+            //string Name = "CARLOS";
+            //sql.Clear();
+            //sql.Append("ALTER DATABASE[" + DatabaseName + "]");
+            //sql.Append("ADD FILE");
+            //sql.Append("(");
+            //sql.Append("NAME = N'" + Name + "',  ");
+            //sql.Append("FILENAME = N'C:\\Rattlesnake\\" + Name + "',  ");
+            //sql.Append("MAXSIZE = 100MB");
+            //sql.Append(")  ");
+            //sql.Append("TO FILEGROUP[FS];");
+            //sqlcommand = sql.ToString();
+            //using (SqlCommand command = new SqlCommand(sqlcommand, connection))
+            //{
+            //    int rowsAffected = command.ExecuteNonQuery();
+            //    Debug.WriteLine(rowsAffected + " row(s) inserted");
+            //}
 
-                    
+
 
 
 
 
 
             //    }
-            
-            
+
+
             //}
             //catch (SqlException e)
             //{
             //    Debug.WriteLine(e.ToString());
             //}
 
-             Debug.WriteLine("All done. Press any key to finish...");
+            Debug.WriteLine("All done. Press any key to finish...");
             
             return View("Upload");
         }
