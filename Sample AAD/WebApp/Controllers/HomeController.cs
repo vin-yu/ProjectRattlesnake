@@ -90,6 +90,30 @@ namespace WebApp.Controllers
         public async Task<ActionResult> Upload()
         {
             ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
+
+            //ATTEMPT TO GET USER'S PROFILE PICTURE, FIX LATER:
+
+            //var servicePoint = new Uri("https://graph.windows.net");
+            //var serviceRoot = new Uri(servicePoint, "<your tenant>"); //e.g. xxx.onmicrosoft.com
+            //const string clientId = "<clientId>";
+            //const string secretKey = "<secretKey>";// ClientID and SecretKey are defined when you register application with Azure AD
+            //var authContext = new AuthenticationContext("https://login.windows.net/<tenant>/oauth2/token");
+            //var credential = new ClientCredential(clientId, secretKey);
+            //ActiveDirectoryClient directoryClient = new ActiveDirectoryClient(serviceRoot, async () =>
+            //{
+            //    var result = await authContext.AcquireTokenAsync("https://graph.windows.net/", credential);
+            //    return result.AccessToken;
+            //});
+
+            //var user = await directoryClient.Users.Where(x => x.UserPrincipalName == "<username>").ExecuteSingleAsync();
+            //DataServiceStreamResponse photo = await user.ThumbnailPhoto.DownloadAsync();
+            //using (MemoryStream s = new MemoryStream())
+            //{
+            //    photo.Stream.CopyTo(s);
+            //    var encodedImage = Convert.ToBase64String(s.ToArray());
+            //}
+
+
             return View();
         }
 
@@ -110,9 +134,105 @@ namespace WebApp.Controllers
         [Authorize]
         public async Task<ActionResult> Transcripts()
         {
-            ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
+
+            //TODO: Search through transcripts:
+            //https://docs.microsoft.com/en-us/azure/search/search-howto-indexing-azure-blob-storage
+
+
+
+
+
+
+
+            //ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
+
+
+
+            // Retrieve storage account from connection string.
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+                CloudConfigurationManager.GetSetting("StorageConnectionString"));
+
+            // Create the blob client.
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+
+            // Retrieve reference to a previously created container.
+            CloudBlobContainer container = blobClient.GetContainerReference("container");
+
+            CloudBlobDirectory dira = container.GetDirectoryReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value);
+            foreach (IListBlobItem item in dira.ListBlobs())
+            {
+                Debug.WriteLine(dira.ListBlobs());
+                CloudBlockBlob blob = (CloudBlockBlob)item;
+                string myfilestr = System.IO.Path.GetFileName(blob.Uri.LocalPath);
+                Debug.WriteLine(myfilestr);
+
+                string extension = Path.GetExtension(myfilestr);
+                Debug.WriteLine(extension);
+                if (extension == ".txt")
+                {
+                    
+                    //CloudBlob blob = container.GetBlobReference(item.ToString());
+                    using (var stream = blob.OpenRead())
+                    {
+                        using (StreamReader reader = new StreamReader(stream))
+                        {
+
+                                Debug.WriteLine(reader.ReadToEnd());
+
+                        }
+                    }
+                }
+
+            }
+            
+            // Loop over items within the container and output the length and URI.
+            //foreach (IListBlobItem item in container.ListBlobs(null, false))
+            //{
+            //    if (item.GetType() == typeof(CloudBlobDirectory))
+            //    {
+            //        //string myfilestr = Request.Form["file"];
+            //        //Label myLabel = this.FindControl("myLabel") as Label;
+            //        //tab_content1.InnerHtml=
+            //        //characters.Length
+
+            //        // we know this is a sub directory now
+            //        CloudBlobDirectory subFolder = (CloudBlobDirectory)item;
+
+            //        String filename = (subFolder.Uri).ToString();
+            //        Debug.WriteLine(filename);
+            //        string[] words = filename.Split('/');
+            //        Debug.WriteLine(words);
+            //        Debug.WriteLine(words[words.Length - 2]);
+
+            //        if (words[words.Length - 2] == ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value)
+            //        {
+            //            foreach (IListBlobItem item2 in subFolder.ListBlobs())
+            //            {
+            //                Debug.WriteLine("HERE");
+            //            } }
+
+            //        // Retrieve reference to a blob named "photo1.jpg".
+            //        CloudBlockBlob blockBlob = container.GetBlockBlobReference("photo1.jpg");
+
+            //        //// Save blob contents to a file.
+            //        //using (var fileStream = System.IO.File.OpenWrite(@"path\myfile"))
+            //        //{
+            //        //    blockBlob.DownloadToStream(fileStream);
+            //        //}
+
+            //        //        string[] readText = File.ReadAllLines(blockBlob);
+            //        StringBuilder strbuild = new StringBuilder();
+            //        //foreach (string s in blockBlob)
+            //        //{
+            //        strbuild.Append(blockBlob);
+            //        strbuild.AppendLine();
+            //        //}
+            //        //TextBox1.Text = strbuild.ToString();
+            //    }
+            //}
+
             return View();
-        }
+                } 
 
 
         [Authorize]
@@ -123,31 +243,44 @@ namespace WebApp.Controllers
 
             //UploadThis();
             string myfilestr = Request.Form["file"];
-            Debug.WriteLine("file: " + myfilestr);
+            
 
             var myFile = Request.Files["file"];
+            
 
             myfilestr = myFile.FileName;
-            Debug.WriteLine(myfilestr);
-            //myFile = filMyFile.PostedFile;
-            //string strFilename = Path.GetFileName(myFile.FileName);
 
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-        CloudConfigurationManager.GetSetting("StorageConnectionString"));
-
-            // Create the blob client.
-            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-
-            // Retrieve reference to a previously created container.
-            CloudBlobContainer container = blobClient.GetContainerReference("container");
-
-            // Retrieve reference to a blob named "myblob".
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(Path.GetFileName(myfilestr));
-
-            // Create or overwrite the "myblob" blob with contents from a local file.
-            using (var fileStream = System.IO.File.OpenRead(@myfilestr))
+            string extension = Path.GetExtension(myfilestr);
+            if (extension == ".mp3" || extension == ".mp4" || extension == ".wav")
             {
-                blockBlob.UploadFromStream(fileStream);
+                Debug.WriteLine("YEAH");
+                ViewBag.Subject = ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
+                ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
+                //myFile = filMyFile.PostedFile;
+                //string strFilename = Path.GetFileName(myFile.FileName);
+                Debug.WriteLine("file: " + ClaimsPrincipal.Current.FindFirst(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value));
+                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+            CloudConfigurationManager.GetSetting("StorageConnectionString"));
+
+                // Create the blob client.
+                CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+
+                // Retrieve reference to a previously created container.
+                CloudBlobContainer container = blobClient.GetContainerReference("container");
+
+                // Retrieve reference to a blob named "myblob".
+                Debug.WriteLine("file: " + ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + Path.GetFileName(myfilestr));
+
+                
+
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + Path.GetFileName(myfilestr));
+
+
+                // Create or overwrite the "myblob" blob with contents from a local file.
+                using (var fileStream = System.IO.File.OpenRead(@myfilestr))
+                {
+                    blockBlob.UploadFromStream(fileStream);
+                }
             }
 
             Debug.WriteLine("All done. Press any key to finish...");

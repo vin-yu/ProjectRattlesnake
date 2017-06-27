@@ -49,12 +49,12 @@
     <!-- /menu footer buttons -->
     <div class="sidebar-footer hidden-small"  style="background:#071033;">
         <div class="col-md-5" style="margin-bottom:20px">
-            <img src="~/Content/Dashboard/img.jpg" alt="Your profile picture." style="border-radius:50%; width:90%; margin-left:5px; margin-right:5px; margin-top:-5px">
+            <img src="https://graph.windows.net/me/thumbnailPhoto?api-version=1.6" alt="Your profile picture." style="border-radius:50%; width:90%; margin-left:5px; margin-right:5px; margin-top:-5px">
         </div>
         <div class="col-md-5" style="margin-bottom:-20px">
-            <p style="text-transform:uppercase; color:#fff; font-size:12px; margin:0px">Firstname Lastname</p>
-            <p style="text-transform:uppercase; color:#8db3ff; font-size:8px; margin:0px">Role</p>
-            <p style="text-transform:uppercase; color:#8db3ff; font-size:8px; margin:0px">Organization</p>
+            <p style="text-transform:uppercase; color:#fff; font-size:12px; margin:0px; text-transform:uppercase;">@ViewBag.Name</p>
+            <p style="text-transform:uppercase; color:#8db3ff; font-size:8px; margin:0px">@ViewBag.Department</p>
+            <p style="text-transform:uppercase; color:#8db3ff; font-size:8px; margin:0px">COMPANY</p>
         </div>
         <br />
         <br />
