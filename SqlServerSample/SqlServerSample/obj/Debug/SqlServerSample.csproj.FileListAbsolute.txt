@@ -1,6 +1,0 @@
-c:\users\victoria cheng\documents\visual studio 2017\Projects\SqlServerSample\SqlServerSample\bin\Debug\SqlServerSample.exe.config
-c:\users\victoria cheng\documents\visual studio 2017\Projects\SqlServerSample\SqlServerSample\bin\Debug\SqlServerSample.exe
-c:\users\victoria cheng\documents\visual studio 2017\Projects\SqlServerSample\SqlServerSample\bin\Debug\SqlServerSample.pdb
-c:\users\victoria cheng\documents\visual studio 2017\Projects\SqlServerSample\SqlServerSample\obj\Debug\SqlServerSample.csprojResolveAssemblyReference.cache
-c:\users\victoria cheng\documents\visual studio 2017\Projects\SqlServerSample\SqlServerSample\obj\Debug\SqlServerSample.exe
-c:\users\victoria cheng\documents\visual studio 2017\Projects\SqlServerSample\SqlServerSample\obj\Debug\SqlServerSample.pdb
