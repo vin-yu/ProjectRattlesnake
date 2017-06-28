@@ -38,6 +38,7 @@ using Microsoft.WindowsAzure.Storage.RetryPolicies;
 using Microsoft.WindowsAzure;
 
 using System.Configuration;
+using System.Globalization;
 
 using System;
 using System.Collections.Generic;
@@ -159,31 +160,11 @@ namespace WebApp.Controllers
             CloudBlobContainer container = blobClient.GetContainerReference("container");
 
             CloudBlobDirectory dira = container.GetDirectoryReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value);
-            foreach (IListBlobItem item in dira.ListBlobs())
-            {
-                Debug.WriteLine(dira.ListBlobs());
-                CloudBlockBlob blob = (CloudBlockBlob)item;
-                string myfilestr = System.IO.Path.GetFileName(blob.Uri.LocalPath);
-                Debug.WriteLine(myfilestr);
 
-                string extension = Path.GetExtension(myfilestr);
-                Debug.WriteLine(extension);
-                if (extension == ".txt")
-                {
-                    
-                    //CloudBlob blob = container.GetBlobReference(item.ToString());
-                    using (var stream = blob.OpenRead())
-                    {
-                        using (StreamReader reader = new StreamReader(stream))
-                        {
+            SearchDirectories(dira);
 
-                                Debug.WriteLine(reader.ReadToEnd());
+            
 
-                        }
-                    }
-                }
-
-            }
             
             // Loop over items within the container and output the length and URI.
             //foreach (IListBlobItem item in container.ListBlobs(null, false))
@@ -233,6 +214,46 @@ namespace WebApp.Controllers
 
             return View();
                 } 
+        public void TranscriptPrint(CloudBlockBlob item)
+        {
+            CloudBlockBlob blob = (CloudBlockBlob)item;
+            string myfilestr = System.IO.Path.GetFileName(blob.Uri.LocalPath);
+            Debug.WriteLine(myfilestr);
+
+            string extension = Path.GetExtension(myfilestr);
+            Debug.WriteLine(extension);
+            if (extension == ".txt")
+            {
+
+                //CloudBlob blob = container.GetBlobReference(item.ToString());
+                using (var stream = blob.OpenRead())
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+
+                        Debug.WriteLine(reader.ReadToEnd());
+
+                    }
+                }
+            }
+        }
+        public void SearchDirectories(CloudBlobDirectory dira)
+        {
+            foreach (IListBlobItem item in dira.ListBlobs())
+            {
+                Debug.WriteLine(dira.ListBlobs());
+                if (item.GetType() == typeof(CloudBlobDirectory))
+                {
+                    Debug.WriteLine("WOW  " + item.Uri.ToString());
+                    SearchDirectories((CloudBlobDirectory)item);
+                }
+                else
+                {
+                    TranscriptPrint((CloudBlockBlob)item);
+                }
+
+            }
+        }
 
 
         [Authorize]
@@ -271,9 +292,9 @@ namespace WebApp.Controllers
                 // Retrieve reference to a blob named "myblob".
                 Debug.WriteLine("file: " + ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + Path.GetFileName(myfilestr));
 
-                
 
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + Path.GetFileName(myfilestr));
+
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + System.DateTime.Now.ToString(new CultureInfo("en-US")) + "/" + Path.GetFileName(myfilestr));
 
 
                 // Create or overwrite the "myblob" blob with contents from a local file.
