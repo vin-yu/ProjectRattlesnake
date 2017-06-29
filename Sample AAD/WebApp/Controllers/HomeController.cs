@@ -263,6 +263,7 @@ namespace WebApp.Controllers
             //HtmlInputFile filMyFile
 
             //UploadThis();
+            string timestamp = System.DateTime.Now.ToString(new CultureInfo("en-US"));
             string myfilestr = Request.Form["file"];
             
 
@@ -270,6 +271,7 @@ namespace WebApp.Controllers
             
 
             myfilestr = myFile.FileName;
+
 
             string extension = Path.GetExtension(myfilestr);
             if (extension == ".mp3" || extension == ".mp4" || extension == ".wav")
@@ -290,7 +292,8 @@ namespace WebApp.Controllers
                 CloudBlobContainer container = blobClient.GetContainerReference("container");
 
                 // Retrieve reference to a blob named "myblob".
-                Debug.WriteLine("file: " + ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + Path.GetFileName(myfilestr));
+                
+                Debug.WriteLine("file: " + ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + timestamp + "/" + Path.GetFileName(myfilestr));
 
 
 
@@ -302,6 +305,52 @@ namespace WebApp.Controllers
                 {
                     blockBlob.UploadFromStream(fileStream);
                 }
+            }
+
+            try
+            {
+                Debug.WriteLine("Connect to SQL Server and demo Create, Read, Update and Delete operations.");
+                // Build connection string
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "projectrattlensake.database.windows.net";   // update me
+                builder.UserID = "PRadmin@projectrattlensake";              // update me
+                builder.Password = "Passw0rd!";      // update me
+                builder.InitialCatalog = "ProjectRattlesnakeDB";
+
+                // Connect to SQL
+                Debug.Write("Connecting to SQL Server ... ");
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    Debug.WriteLine("Done.");
+
+                    // Create a sample database
+                    string DatabaseName = "ProjectRattlesnakeDB";
+                    string sqlcommand = "";
+                    Debug.Write("Dropping and creating database '" + DatabaseName + "' ... ");
+                    StringBuilder sql = new StringBuilder();
+                    sql.Append("USE ProjectRattlesnakeDB; ");
+
+                    sql.Append("INSERT INTO RattleSnakeTable");
+                    sql.Append("([UserName], [UserID], [Upload_Time], [Audio_File], [Transcription_Status],[Transcription_File],[Analysis_Status],[Analysis_File])");
+                    sql.Append("VALUES");
+                    sql.Append("("+ ViewBag.Name +",'888888888','6/28/2017 1:48:19 PM','meeting8.wav', 0,NULL, 0, NULL);");
+
+                    sqlcommand = sql.ToString();
+                    using (SqlCommand command = new SqlCommand(sqlcommand, connection))
+                    {
+                        command.ExecuteNonQuery();
+                        Debug.WriteLine("Done.");
+                    }
+
+
+                }
+
+
+            }
+            catch (SqlException e)
+            {
+                Debug.WriteLine(e.ToString());
             }
 
             Debug.WriteLine("All done. Press any key to finish...");
@@ -319,104 +368,7 @@ namespace WebApp.Controllers
 
 
 
-        //try
-        //{
-        //    Debug.WriteLine("Connect to SQL Server and demo Create, Read, Update and Delete operations.");
-        //    // Build connection string
-        //    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-        //    builder.DataSource = "localhost";   // update me
-        //    builder.UserID = "sa";              // update me
-        //    builder.Password = "password123";      // update me
-        //    builder.InitialCatalog = "master";
-
-        //    // Connect to SQL
-        //    Debug.Write("Connecting to SQL Server ... ");
-        //    using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-        //    {
-        //        connection.Open();
-        //        Debug.WriteLine("Done.");
-
-        //        // Create a sample database
-        //        string DatabaseName = "TheButtonWorks";
-        //        string sqlcommand = "";
-        //        Debug.Write("Dropping and creating database '" + DatabaseName + "' ... ");
-        //        StringBuilder sql = new StringBuilder();
-        //        sql.Append("USE master; ");
-        //        sql.Append("IF NOT EXISTS (SELECT * FROM master.dbo.sysdatabases WHERE name = '" + DatabaseName + "')");
-        //        sql.Append("    CREATE DATABASE[" + DatabaseName + "]   ");
-        //        sql.Append("    CONTAINMENT = NONE  ");
-        //        sql.Append("    ON PRIMARY");
-        //        sql.Append("    (");
-        //        sql.Append("        NAME = N'" + DatabaseName + "',   ");
-        //        sql.Append("        FILENAME = N'C:\\Rattlesnake\\" + DatabaseName + ".mdf',  ");
-        //        sql.Append("        SIZE = 100MB,  ");
-        //        sql.Append("        MAXSIZE = UNLIMITED,  ");
-        //        sql.Append("        FILEGROWTH = 1MB");
-        //        sql.Append("    ),   ");
-        //        sql.Append("    FILEGROUP[FS] CONTAINS FILESTREAM DEFAULT");
-        //        sql.Append("    (");
-        //        sql.Append("        NAME = N'FS9',");
-        //        sql.Append("        FILENAME = N'C:\\Rattlesnake\\FS9',");
-        //        sql.Append("        MAXSIZE = UNLIMITED");
-        //        sql.Append("    ),   ");
-        //        sql.Append("    (");
-        //        sql.Append("        NAME = N'FS10',  ");
-        //        sql.Append("        FILENAME = N'C:\\Rattlesnake\\FS10',  ");
-        //        sql.Append("        MAXSIZE = 100MB");
-        //        sql.Append("    )  ");
-        //        sql.Append("    LOG ON");
-        //        sql.Append("    (");
-        //        sql.Append("        NAME = N'" + DatabaseName + "_log',  ");
-        //        sql.Append("        FILENAME = N'C:\\Rattlesnake\\" + DatabaseName + "_log.ldf',  ");
-        //        sql.Append("        SIZE = 100MB,  ");
-        //        sql.Append("        MAXSIZE = 1GB,  ");
-        //        sql.Append("        FILEGROWTH = 1MB");
-        //        sql.Append("    );");
-
-        //        sqlcommand = sql.ToString();
-        //        using (SqlCommand command = new SqlCommand(sqlcommand, connection))
-        //        {
-        //            command.ExecuteNonQuery();
-        //            Debug.WriteLine("Done.");
-        //        }
-
-
-
-
-        // INSERT demo
-        //Debug.Write("Inserting a new row into table, press any key to continue...");
-
-        //string Name = "CARLOS";
-        //sql.Clear();
-        //sql.Append("ALTER DATABASE[" + DatabaseName + "]");
-        //sql.Append("ADD FILE");
-        //sql.Append("(");
-        //sql.Append("NAME = N'" + Name + "',  ");
-        //sql.Append("FILENAME = N'C:\\Rattlesnake\\" + Name + "',  ");
-        //sql.Append("MAXSIZE = 100MB");
-        //sql.Append(")  ");
-        //sql.Append("TO FILEGROUP[FS];");
-        //sqlcommand = sql.ToString();
-        //using (SqlCommand command = new SqlCommand(sqlcommand, connection))
-        //{
-        //    int rowsAffected = command.ExecuteNonQuery();
-        //    Debug.WriteLine(rowsAffected + " row(s) inserted");
-        //}
-
-
-
-
-
-
-
-        //    }
-
-
-        //}
-        //catch (SqlException e)
-        //{
-        //    Debug.WriteLine(e.ToString());
-        //}
+       
 
 
 
