@@ -264,6 +264,7 @@ namespace WebApp.Controllers
 
             //UploadThis();
             string timestamp = System.DateTime.Now.ToString(new CultureInfo("en-US"));
+            Guid g = Guid.NewGuid();
             string myfilestr = Request.Form["file"];
             
 
@@ -293,11 +294,11 @@ namespace WebApp.Controllers
 
                 // Retrieve reference to a blob named "myblob".
                 
-                Debug.WriteLine("file: " + ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + timestamp + "/" + Path.GetFileName(myfilestr));
+                Debug.WriteLine("file: " + g.ToString()+ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + timestamp + "/" + Path.GetFileName(myfilestr));
 
 
 
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + System.DateTime.Now.ToString(new CultureInfo("en-US")) + "/" + Path.GetFileName(myfilestr));
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + g.ToString() + Path.GetFileName(myfilestr));
 
 
                 // Create or overwrite the "myblob" blob with contents from a local file.
@@ -327,16 +328,19 @@ namespace WebApp.Controllers
                     // Create a sample database
                     string DatabaseName = "ProjectRattlesnakeDB";
                     string sqlcommand = "";
-                    Debug.Write("Dropping and creating database '" + DatabaseName + "' ... ");
                     StringBuilder sql = new StringBuilder();
                     sql.Append("USE ProjectRattlesnakeDB; ");
 
                     sql.Append("INSERT INTO RattleSnakeTable");
-                    sql.Append("([UserName], [UserID], [Upload_Time], [Audio_File], [Transcription_Status],[Transcription_File],[Analysis_Status],[Analysis_File])");
+                    sql.Append("([FileGuid],[UserName], [UserID], [Upload_Time], [Audio_File], [Transcription_Status],[Transcription_File],[Analysis_Status],[Analysis_File])");
                     sql.Append("VALUES");
-                    sql.Append("("+ ViewBag.Name +",'888888888','6/28/2017 1:48:19 PM','meeting8.wav', 0,NULL, 0, NULL);");
+                    sql.Append("('"+g.ToString()+"','" + (ClaimsPrincipal.Current.FindFirst("name").Value).ToString() + "', '"+ (ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value).ToString() + "','"+timestamp+"','"+ g.ToString()+Path.GetFileName(myfilestr) + "', 0,NULL, 0, NULL);");
+
+                    
 
                     sqlcommand = sql.ToString();
+
+                    Debug.WriteLine(sqlcommand);
                     using (SqlCommand command = new SqlCommand(sqlcommand, connection))
                     {
                         command.ExecuteNonQuery();
