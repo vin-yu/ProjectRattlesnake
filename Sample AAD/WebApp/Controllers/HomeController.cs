@@ -140,7 +140,8 @@ namespace WebApp.Controllers
             //https://docs.microsoft.com/en-us/azure/search/search-howto-indexing-azure-blob-storage
 
 
-
+            ActionResult results = GetUserFiles();
+            Debug.WriteLine(results);
 
 
 
@@ -163,9 +164,9 @@ namespace WebApp.Controllers
 
             SearchDirectories(dira);
 
-            
 
-            
+
+
             // Loop over items within the container and output the length and URI.
             //foreach (IListBlobItem item in container.ListBlobs(null, false))
             //{
@@ -211,6 +212,22 @@ namespace WebApp.Controllers
             //        //TextBox1.Text = strbuild.ToString();
             //    }
             //}
+
+            ViewBag.results = new Tuple<String, String, String>[] {
+                Tuple.Create("Meeting 1", "Recording 1", "Transcript1"),
+                Tuple.Create("Meeting 2", "Recording 2", "Transcript2"),
+                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
+                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
+                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
+                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
+                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
+                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
+                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
+                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
+                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
+                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
+                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
+            };
 
             return View();
                 } 
@@ -362,6 +379,85 @@ namespace WebApp.Controllers
             return View("Upload");
         }
 
+        [Authorize]
+        public ActionResult GetUserFiles()
+        {
+            try
+            {
+                Debug.WriteLine("Connect to SQL Server and demo Create, Read, Update and Delete operations.");
+                // Build connection string
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "projectrattlensake.database.windows.net";   // update me
+                builder.UserID = "PRadmin@projectrattlensake";              // update me
+                builder.Password = "Passw0rd!";      // update me
+                builder.InitialCatalog = "ProjectRattlesnakeDB";
+
+                Debug.Write("Connecting to SQL Server ... ");
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    Debug.WriteLine("Done.");
+
+                    // Create a sample database
+                    string DatabaseName = "ProjectRattlesnakeDB";
+                    string sqlcommand = "";
+                    StringBuilder sql = new StringBuilder();
+                    sql.Append("USE ProjectRattlesnakeDB; ");
+                    sql.Append("SELECT Audio_File, Transcription_File, Analysis_File FROM RattleSnakeTable WHERE UserID = " + (ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value).ToString() + ";");
+
+                    sqlcommand = sql.ToString();
+
+                    Debug.WriteLine(sqlcommand);
+                    using (SqlCommand command = new SqlCommand(sqlcommand, connection))
+                    {
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                Console.WriteLine("{0}\t{1}", reader.GetInt32(0),
+                                    reader.GetString(1));
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("No rows found.");
+                        }
+
+                        reader.Close();
+
+                        Debug.WriteLine("Done.");
+                    }
+
+                    CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+                    CloudConfigurationManager.GetSetting("StorageConnectionString"));
+
+                    // Create the blob client.
+                    CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+
+                    // Retrieve reference to a previously created container.
+                    CloudBlobContainer container = blobClient.GetContainerReference("container");
+
+                    // Retrieve reference to a blob named "myblob".
+
+                    //CloudBlockBlob blockBlob = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + Path.GetFileName(myfilestr));
+
+
+
+
+                }
+            }
+            catch (SqlException e)
+            {
+                Debug.WriteLine(e.ToString());
+            }
+
+            Debug.WriteLine("All done. Press any key to finish...");
+
+            return View("Upload");
+
+
+        }
 
 
 
@@ -372,7 +468,8 @@ namespace WebApp.Controllers
 
 
 
-       
+
+
 
 
 
