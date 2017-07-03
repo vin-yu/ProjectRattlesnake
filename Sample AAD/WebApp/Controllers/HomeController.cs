@@ -162,72 +162,21 @@ namespace WebApp.Controllers
 
             CloudBlobDirectory dira = container.GetDirectoryReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value);
 
-            SearchDirectories(dira);
 
-
-
-
-            // Loop over items within the container and output the length and URI.
-            //foreach (IListBlobItem item in container.ListBlobs(null, false))
-            //{
-            //    if (item.GetType() == typeof(CloudBlobDirectory))
-            //    {
-            //        //string myfilestr = Request.Form["file"];
-            //        //Label myLabel = this.FindControl("myLabel") as Label;
-            //        //tab_content1.InnerHtml=
-            //        //characters.Length
-
-            //        // we know this is a sub directory now
-            //        CloudBlobDirectory subFolder = (CloudBlobDirectory)item;
-
-            //        String filename = (subFolder.Uri).ToString();
-            //        Debug.WriteLine(filename);
-            //        string[] words = filename.Split('/');
-            //        Debug.WriteLine(words);
-            //        Debug.WriteLine(words[words.Length - 2]);
-
-            //        if (words[words.Length - 2] == ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value)
-            //        {
-            //            foreach (IListBlobItem item2 in subFolder.ListBlobs())
-            //            {
-            //                Debug.WriteLine("HERE");
-            //            } }
-
-            //        // Retrieve reference to a blob named "photo1.jpg".
-            //        CloudBlockBlob blockBlob = container.GetBlockBlobReference("photo1.jpg");
-
-            //        //// Save blob contents to a file.
-            //        //using (var fileStream = System.IO.File.OpenWrite(@"path\myfile"))
-            //        //{
-            //        //    blockBlob.DownloadToStream(fileStream);
-            //        //}
-
-            //        //        string[] readText = File.ReadAllLines(blockBlob);
-            //        StringBuilder strbuild = new StringBuilder();
-            //        //foreach (string s in blockBlob)
-            //        //{
-            //        strbuild.Append(blockBlob);
-            //        strbuild.AppendLine();
-            //        //}
-            //        //TextBox1.Text = strbuild.ToString();
-            //    }
-            //}
-
-            ViewBag.results = new Tuple<String, String, String>[] {
-                Tuple.Create("Meeting 1", "Recording 1", "Transcript1"),
-                Tuple.Create("Meeting 2", "Recording 2", "Transcript2"),
-                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
-                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
-                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
-                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
-                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
-                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
-                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
-                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
-                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
-                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
-                Tuple.Create("Meeting 3", "Recording 3", "Transcript3"),
-            };
+        //    ViewBag.results = new Tuple<HtmlAudio, String, String>[] {
+        //        Tuple.Create("Meeting 1", "Recording 1", "Transcript1"),
+        //        foreach (IListBlobItem item in dira.ListBlobs())
+        //    {
+        //        Debug.WriteLine(dira.ListBlobs());
+        //        if (item.GetType() == typeof(CloudBlobDirectory))
+        //        {
+        //            Debug.WriteLine("WOW  " + item.Uri.ToString());
+        //            foreach (IListBlobItem file in item.ListBlobs())
+        //            {
+        //                Tuple.Create(file.Uri.ToString., blob.DownloadText(););
+        //            }
+        //    }
+        //};
 
             return View();
                 } 
@@ -315,7 +264,7 @@ namespace WebApp.Controllers
 
 
 
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + g.ToString() + Path.GetFileName(myfilestr));
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + g.ToString() + "/" + Path.GetFileName(myfilestr));
 
 
                 // Create or overwrite the "myblob" blob with contents from a local file.
