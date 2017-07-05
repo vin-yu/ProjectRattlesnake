@@ -367,9 +367,13 @@ namespace WebApp.Controllers
                                     {
                                         using (StreamReader reader1 = new StreamReader(stream))
                                         {
+                                            string line = "";
+                                            while ((line = reader1.ReadLine()) != null)
+                                            {
 
-                                            transcription_file = reader1.ReadToEnd();
-
+                                                transcription_file+=line;
+                                                transcription_file+="\n";
+                                            }
                                         }
                                     }
                                 }
@@ -464,7 +468,7 @@ namespace WebApp.Controllers
 
 
 
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + g.ToString() + "/" + Path.GetFileName(myfilestr));
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + g.ToString() + Path.GetFileName(myfilestr));
 
 
                 // Create or overwrite the "myblob" blob with contents from a local file.
