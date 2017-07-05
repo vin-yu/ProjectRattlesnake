@@ -21,7 +21,7 @@
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     @{
-        for (var i = 0; i < ViewBag.results.Length; i++) {
+        for (var i = 0; i < ViewBag.results.Count; i++) {
             var meeting = ViewBag.results[i].Item1;
             var recording = ViewBag.results[i].Item2;
             var transcript = ViewBag.results[i].Item3;
