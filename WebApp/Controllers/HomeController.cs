@@ -291,7 +291,7 @@ namespace WebApp.Controllers
             string audio_filename = "";
             string transcription_filename = "";
             string analysis_filename = "";
-            ViewBag.results = new Tuple<CloudBlockBlob, String, String>[0];
+            ViewBag.results = new Tuple<CloudBlockBlob, String, String>[] { };
             try
             {
                 Debug.WriteLine("Connect to SQL Server and demo Create, Read, Update and Delete operations.");
@@ -313,7 +313,7 @@ namespace WebApp.Controllers
                     string sqlcommand = "";
                     StringBuilder sql = new StringBuilder();
                     sql.Append("USE ProjectRattlesnakeDB; ");
-                    sql.Append("SELECT Audio_File, Transcription_Status, Transcription_File, Analysis_Status, Analysis_File FROM RattleSnakeTable WHERE UserID = " + (ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value).ToString() + ";");
+                    sql.Append("SELECT Audio_File, Transcription_Status, Transcription_File, Analysis_Status, Analysis_File FROM RattleSnakeTable WHERE UserID = '" + (ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value).ToString() + "';");
 
                     sqlcommand = sql.ToString();
 
@@ -328,7 +328,7 @@ namespace WebApp.Controllers
                             {
                                 audio_filename = reader.GetString(0);
                                 Debug.WriteLine(audio_filename);
-                                if (reader.GetString(1) == "2")
+                                if (reader.GetInt32(1) == 2)
                                 {
                                     transcription_filename = reader.GetString(2);
                                 }
@@ -336,7 +336,7 @@ namespace WebApp.Controllers
                                 {
                                     transcription_filename = "NULL";
                                 }
-                                if (reader.GetString(3) == "2")
+                                if (reader.GetInt32(3) == 2)
                                 {
                                     analysis_filename = reader.GetString(4);
                                 }
@@ -387,7 +387,7 @@ namespace WebApp.Controllers
                                         }
                                     }
                                 }
-                                ViewBag.results.add(
+                                ViewBag.results.Add(
                                     Tuple.Create(audio_file, transcription_file, analysis_file)
                                 );
 
