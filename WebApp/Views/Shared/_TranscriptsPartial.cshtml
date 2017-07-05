@@ -1,38 +1,59 @@
 ﻿@{
     ViewData["Title"] = "Transcripts";
 }
-<!-- page content -->
-        <div class="page-title">
-            <div class="title_left">
-                <h3>My Transcripts</h3>
-            </div>
-            <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
-                    </div>
-                </div>
+<div class="page-title">
+    <div class="title_left">
+        <h3>My Transcripts</h3>
+    </div>
+    <div class="title_right">
+        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Go!</button>
+                </span>
             </div>
         </div>
-        <div class="clearfix"></div>
-        <div class="">
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2><i class="fa fa-bars"></i> Name of Meeting <small>Date of Meeting</small></h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                            
-                            <li>
-                                <a class="close-link"><i class="fa fa-close"></i></a>
-                            </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
+    </div>
+</div>
+<div class="clearfix"></div>
 
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    @{
+        for (var i = 0; i < ViewBag.results.Length; i++) {
+            var meeting = ViewBag.results[i].Item1;
+            var recording = ViewBag.results[i].Item2;
+            var transcript = ViewBag.results[i].Item3;
+            var heading = "heading" + i;
+            var collapse = "collapse" + i;
+            var collapse2 = "#collapse" + i;
+            var meetingTabName = "meeting" + i;
+            var meetingTabName2 = "#meeting" + i;
+            var recordingTabName = "recording" + i;
+            var recordingTabName2 = "#recording" + i;
+            var transcriptTabName = "transcript" + i;
+            var transcriptTabName2 = "#transcript" + i;
+
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id=@heading>
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href=@collapse2>
+                                @meeting
+                            </a>
+                        </h4>
+                    </div>
+                    <div id=@collapse class="panel-collapse collapse" role="tabpanel" aria-labelledby=@heading>
+                        <div class="panel-body">
+                            <div>
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href=@meetingTabName2 role="tab" data-toggle="tab">Meeting Information</a></li>
+                                    <li role="presentation"><a href=@recordingTabName2 role="tab" data-toggle="tab">Recording</a></li>
+                                    <li role="presentation"><a href=@transcriptTabName2 role="tab" data-toggle="tab">Transcript</a></li>
+                                </ul>
+
+<<<<<<< HEAD:WebApp/Views/Shared/_TranscriptsPartial.cshtml
                         <div class="" role="tabpanel" data-example-id="togglable-tabs">
                             <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                                 <li role="presentation" class="active">
@@ -54,30 +75,59 @@
                                         Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher
                                         synth. Cosby sweater eu banh mi, qui irure terr.
                                     </p>
+=======
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id=@meetingTabName>@meeting</div>
+                                    <div role="tabpanel" class="tab-pane" id=@recordingTabName>@recording</div>
+                                    <div role="tabpanel" class="tab-pane" id=@transcriptTabName>@transcript</div>
+>>>>>>> fileupload:Sample AAD/WebApp/Views/Shared/_TranscriptsPartial.cshtml
                                 </div>
-                                <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-                                        <div class="thumbnail">
-                                            <div class="image view view-first">
-                                                <img style="width: 100%; display: block;" src="images/media.jpg" alt="image" />
-                                                <div class="mask">
-                                                    <p>Your Text</p>
-                                                    <div class="tools tools-bottom">
-                                                        <a href="#"><i class="fa fa-link"></i></a>
-                                                        <a href="#"><i class="fa fa-pencil"></i></a>
-                                                        <a href="#"><i class="fa fa-times"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="caption">
-                                                <p>Meeting_Name_date.mp4</p>
-                                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+  
+
+<div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="x_panel">
+        <div class="x_content">
+
+            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true" style="color:#071033;">Meeting Information</a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false"  style="color:#071033;">Recording</a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false" style="color:#071033;">Transcript</a>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab" runat="server">
+                        <p>
+                        </p>
+                    </div>
+                    <div> <asp:label role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab" runat="server">
+                            <div class="thumbnail">
+                                <div class="image view view-first">
+                                    <img style="width: 100%; display: block;" src="images/media.jpg" alt="image" />
+                                    <div class="mask">
+                                        <p>Your Text</p>
+                                        <div class="tools tools-bottom">
+                                            <a href="#"><i class="fa fa-link"></i></a>
+                                            <a href="#"><i class="fa fa-pencil"></i></a>
+                                            <a href="#"><i class="fa fa-times"></i></a>
                                         </div>
                                     </div>
-                                <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-                                    <p>
-                                        xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
-                                        booth letterpress, commodo enim craft beer mlkshk
-                                    </p>
+                                </div>
+                                <div class="caption">
+                                    <p>Meeting_Name_date.mp4</p>
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade active in" id="tab_content4" aria-labelledby="home-tab">
                                     <p>
@@ -87,7 +137,14 @@
                                 </div>
                             </div>
                         </div>
+                    <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab" runat="server">
+                        <p>
+                            xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
+                            booth letterpress, commodo enim craft beer mlkshk
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
