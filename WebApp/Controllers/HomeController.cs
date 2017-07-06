@@ -291,7 +291,7 @@ namespace WebApp.Controllers
             string audio_filename = "";
             string transcription_filename = "";
             string analysis_filename = "";
-            ViewBag.results = new List<Tuple<CloudBlockBlob, String, String>>();
+            ViewBag.results = new List<Tuple<String, String, String>>();
             try
             {
                 Debug.WriteLine("Connect to SQL Server and demo Create, Read, Update and Delete operations.");
@@ -356,7 +356,7 @@ namespace WebApp.Controllers
 
                                 // Retrieve reference to a blob named "myblob".
 
-                                CloudBlockBlob audio_file = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + audio_filename);
+                                string audio_file = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + audio_filename).Uri.ToString();
                                 string transcription_file = "The file has not been transcribed yet.";
                                 string analysis_file = "The file has not been analyzed yet.";
 
@@ -367,12 +367,13 @@ namespace WebApp.Controllers
                                     {
                                         using (StreamReader reader1 = new StreamReader(stream))
                                         {
+                                            transcription_file = "";
                                             string line = "";
                                             while ((line = reader1.ReadLine()) != null)
                                             {
 
                                                 transcription_file+=line;
-                                                transcription_file+="\n";
+                                                transcription_file +="//n";
                                             }
                                         }
                                     }

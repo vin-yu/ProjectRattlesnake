@@ -55,7 +55,14 @@
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane active" id=@meetingTabName>@meeting</div>
-                                    <div role="tabpanel" class="tab-pane" id=@recordingTabName>@recording</div>
+                                    <div role="tabpanel" class="tab-pane" id=@recordingTabName>
+                                        @{ var lines = recording.Split(new[] { '\r', '\n' });
+                                        foreach (var line in lines)
+                                        {
+                                        <p>@line</p>
+                                        }
+                                        }
+                                    </div>
                                     <div role="tabpanel" class="tab-pane" id=@transcriptTabName>@transcript</div>
                                 </div>
                             </div>
