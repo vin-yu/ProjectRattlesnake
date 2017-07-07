@@ -291,7 +291,7 @@ namespace WebApp.Controllers
             string audio_filename = "";
             string transcription_filename = "";
             string analysis_filename = "";
-            ViewBag.results = new List<Tuple<String, String, String>>();
+            ViewBag.results = new List<Tuple<String, string[], String>>();
             try
             {
                 Debug.WriteLine("Connect to SQL Server and demo Create, Read, Update and Delete operations.");
@@ -373,12 +373,15 @@ namespace WebApp.Controllers
                                             {
 
                                                 transcription_file+=line;
-                                                transcription_file +="//n";
+                                                transcription_file +="\n";
                                             }
                                         }
                                     }
                                 }
-
+                                var lines = transcription_file.Split('\n');
+                                Debug.WriteLine(lines);
+                                string[] transcription_file_lines = lines;
+                                Debug.WriteLine(transcription_file_lines);
                                 if (analysis_filename != "NULL")
                                 {
                                     CloudBlockBlob blob = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + analysis_filename);
@@ -393,7 +396,7 @@ namespace WebApp.Controllers
                                     }
                                 }
                                 ViewBag.results.Add(
-                                    Tuple.Create(audio_file, transcription_file, analysis_file)
+                                    Tuple.Create(audio_file, transcription_file_lines, analysis_file)
                                 );
 
                             }
