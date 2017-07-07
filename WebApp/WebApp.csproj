@@ -279,7 +279,6 @@
     <Content Include="bin\de\Microsoft.Data.Services.Client.resources.dll" />
     <Content Include="bin\de\System.Spatial.resources.dll" />
     <Content Include="bin\DotNetOpenAuth.AspNet.dll" />
-    <Content Include="bin\DotNetOpenAuth.AspNet.xml" />
     <Content Include="bin\DotNetOpenAuth.Core.dll" />
     <Content Include="bin\DotNetOpenAuth.Core.xml" />
     <Content Include="bin\DotNetOpenAuth.OAuth.Consumer.dll" />
