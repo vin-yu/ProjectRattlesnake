@@ -1,19 +1,14 @@
 ﻿using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Protocols;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using WebApp_OpenIDConnect_DotNet.Models;
-using System.Configuration;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OpenIdConnect;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Web.UI.WebControls;
@@ -23,14 +18,8 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls.WebParts;
 
 using System.Xml.Linq;
-using System;
-using System.Text;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -46,24 +35,9 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.ServiceModel.Channels;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Azure;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Auth;
-using Microsoft.WindowsAzure.Storage.Blob;
-using Microsoft.WindowsAzure.Storage.RetryPolicies;
-using Microsoft.WindowsAzure.Storage.Shared.Protocol;
 
-using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Auth;
-using Microsoft.WindowsAzure.Storage.Blob;
-using Microsoft.WindowsAzure.Storage.RetryPolicies;
-using System.Web.UI.HtmlControls;
+using Microsoft.WindowsAzure.Storage.Shared.Protocol;
 
 
 
