@@ -272,6 +272,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom.min.css" />
     <Content Include="Content\Dashboard\bootstrap-progressbar-3.3.4.min.css" />
     <Content Include="Content\Dashboard\bootstrap.min.css" />
     <Content Include="Content\Dashboard\custom.css" />
@@ -290,6 +291,7 @@
     <Content Include="Content\Dashboard\style1.css" />
     <Content Include="Content\dropzone.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\green.css" />
     <Content Include="Content\img\down_arrows.png" />
     <Content Include="Content\img\events_line.svg" />
     <Content Include="Content\img\grab-vector-graphic-person-icon--imagebasket-13.png" />
@@ -330,6 +332,7 @@
     <Content Include="Content\img\spacing_picture_7.png" />
     <Content Include="Content\img\spacing_picture_8.png" />
     <Content Include="Content\microsoft.png" />
+    <Content Include="Content\nprogress.css" />
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\owl.theme.css" />
     <Content Include="Content\style.css" />
@@ -370,9 +373,11 @@
     <Content Include="Scripts\Audio\js\main.js" />
     <Content Include="Scripts\Audio\js\recorderjs\recorder.js" />
     <Content Include="Scripts\Audio\js\recorderjs\recorderWorker.js" />
+    <Content Include="Scripts\bootstrap-progressbar.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\custom.min.js" />
     <Content Include="Scripts\Dashboard\bootstrap-progressbar.min.js" />
     <Content Include="Scripts\Dashboard\bootstrap.min.js" />
     <Content Include="Scripts\Dashboard\Chart.min.js" />
@@ -398,6 +403,7 @@
     <Content Include="Scripts\Dashboard\moment.min.js" />
     <Content Include="Scripts\Dashboard\nprogress.js" />
     <Content Include="Scripts\Dashboard\skycons.js" />
+    <Content Include="Scripts\fastclick.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -408,6 +414,7 @@
     <Content Include="Scripts\jquery.stellar.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\nprogress.js" />
     <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
