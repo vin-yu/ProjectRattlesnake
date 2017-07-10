@@ -444,7 +444,7 @@ namespace WebApp.Controllers
 
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + g.ToString() + Path.GetFileName(myfilestr));
 
-
+                return View("Upload");
                 // Create or overwrite the "myblob" blob with contents from a local file.
                 using (var fileStream = System.IO.File.OpenRead(@myfilestr))
                 {
