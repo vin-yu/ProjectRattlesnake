@@ -414,7 +414,7 @@ namespace WebApp.Controllers
             string timestamp = System.DateTime.Now.ToString(new CultureInfo("en-US"));
             Guid g = Guid.NewGuid();
             string myfilestr = Request.Form["file"];
-            
+            Trace.WriteLine("first log");
 
             var myFile = Request.Files["file"];
             
