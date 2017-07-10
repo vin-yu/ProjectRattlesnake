@@ -420,10 +420,10 @@ namespace WebApp.Controllers
             
             if (extension == ".mp3" || extension == ".mp4" || extension == ".wav")
             {
-                return View("Upload");
                 Debug.WriteLine("YEAH");
                 ViewBag.Subject = ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
                 ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
+                return View("Upload");
                 //myFile = filMyFile.PostedFile;
                 //string strFilename = Path.GetFileName(myFile.FileName);
                 Debug.WriteLine("file: " + ClaimsPrincipal.Current.FindFirst(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value));
