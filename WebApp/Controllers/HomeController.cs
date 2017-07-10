@@ -65,7 +65,7 @@ namespace WebApp.Controllers
         public async Task<ActionResult> Upload()
         {
             ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
-
+            Trace.WriteLine("first log OEOEOEOEOEOEOEOEOEOOEOEEOEOEOOEOEOEOEOEOEOEOO");
             //ATTEMPT TO GET USER'S PROFILE PICTURE, FIX LATER:
 
             //var servicePoint = new Uri("https://graph.windows.net");
@@ -421,7 +421,6 @@ namespace WebApp.Controllers
 
             myfilestr = myFile.FileName;
 
-
             string extension = Path.GetExtension(myfilestr);
             if (extension == ".mp3" || extension == ".mp4" || extension == ".wav")
             {
@@ -431,9 +430,8 @@ namespace WebApp.Controllers
                 //myFile = filMyFile.PostedFile;
                 //string strFilename = Path.GetFileName(myFile.FileName);
                 Debug.WriteLine("file: " + ClaimsPrincipal.Current.FindFirst(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value));
-                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-            CloudConfigurationManager.GetSetting("StorageConnectionString"));
-
+                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["ConnectionAzure"].ConnectionString);
+                //CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
                 // Create the blob client.
                 CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
