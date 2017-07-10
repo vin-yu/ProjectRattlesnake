@@ -408,7 +408,6 @@ namespace WebApp.Controllers
         {
             // Retrieve storage account from connection string.
             //HtmlInputFile filMyFile
-            return View("Upload");
             //UploadThis();
             string timestamp = System.DateTime.Now.ToString(new CultureInfo("en-US"));
             Guid g = Guid.NewGuid();
@@ -419,10 +418,10 @@ namespace WebApp.Controllers
             myfilestr = myFile.FileName;
 
             string extension = Path.GetExtension(myfilestr);
+            
             if (extension == ".mp3" || extension == ".mp4" || extension == ".wav")
             {
                 Debug.WriteLine("YEAH");
-      
                 ViewBag.Subject = ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
                 ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
                 //myFile = filMyFile.PostedFile;
