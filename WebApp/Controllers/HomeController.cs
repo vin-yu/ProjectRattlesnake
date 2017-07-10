@@ -419,10 +419,11 @@ namespace WebApp.Controllers
             myfilestr = myFile.FileName;
 
             string extension = Path.GetExtension(myfilestr);
+            return View("Upload");
             if (extension == ".mp3" || extension == ".mp4" || extension == ".wav")
             {
                 Debug.WriteLine("YEAH");
-                return View("Upload");
+      
                 ViewBag.Subject = ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
                 ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
                 //myFile = filMyFile.PostedFile;
