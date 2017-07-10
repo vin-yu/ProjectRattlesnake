@@ -419,6 +419,7 @@ namespace WebApp.Controllers
             myfilestr = myFile.FileName;
 
             string extension = Path.GetExtension(myfilestr);
+            return View("Upload");
             if (extension == ".mp3" || extension == ".mp4" || extension == ".wav")
             {
                 Debug.WriteLine("YEAH");
