@@ -419,7 +419,6 @@ namespace WebApp.Controllers
             myfilestr = myFile.FileName;
 
             string extension = Path.GetExtension(myfilestr);
-            return View("Upload");
             if (extension == ".mp3" || extension == ".mp4" || extension == ".wav")
             {
                 Debug.WriteLine("YEAH");
@@ -428,6 +427,7 @@ namespace WebApp.Controllers
                 //myFile = filMyFile.PostedFile;
                 //string strFilename = Path.GetFileName(myFile.FileName);
                 Debug.WriteLine("file: " + ClaimsPrincipal.Current.FindFirst(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value));
+                return View("Upload")
                 try{
                     CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["ConnectionAzure"].ConnectionString);
                 }
