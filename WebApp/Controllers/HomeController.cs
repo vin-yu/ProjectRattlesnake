@@ -410,7 +410,6 @@ namespace WebApp.Controllers
             //HtmlInputFile filMyFile
 
             //UploadThis();
-            return View("Upload");
             string timestamp = System.DateTime.Now.ToString(new CultureInfo("en-US"));
             Guid g = Guid.NewGuid();
             string myfilestr = Request.Form["file"];
