@@ -408,7 +408,7 @@ namespace WebApp.Controllers
         {
             // Retrieve storage account from connection string.
             //HtmlInputFile filMyFile
-
+            return View("Upload");
             //UploadThis();
             string timestamp = System.DateTime.Now.ToString(new CultureInfo("en-US"));
             Guid g = Guid.NewGuid();
@@ -419,7 +419,6 @@ namespace WebApp.Controllers
             myfilestr = myFile.FileName;
 
             string extension = Path.GetExtension(myfilestr);
-            return View("Upload");
             if (extension == ".mp3" || extension == ".mp4" || extension == ".wav")
             {
                 Debug.WriteLine("YEAH");
