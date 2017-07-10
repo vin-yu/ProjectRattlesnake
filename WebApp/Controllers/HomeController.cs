@@ -423,13 +423,12 @@ namespace WebApp.Controllers
                 Debug.WriteLine("YEAH");
                 ViewBag.Subject = ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
                 ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
-                return View("Upload");
                 //myFile = filMyFile.PostedFile;
                 //string strFilename = Path.GetFileName(myFile.FileName);
                 Debug.WriteLine("file: " + ClaimsPrincipal.Current.FindFirst(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value));
                 
                 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["ConnectionAzure"].ConnectionString);
-                
+                return View("Upload");
                 //CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
                 // Create the blob client.
                 CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
