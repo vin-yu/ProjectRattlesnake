@@ -422,12 +422,12 @@ namespace WebApp.Controllers
             if (extension == ".mp3" || extension == ".mp4" || extension == ".wav")
             {
                 Debug.WriteLine("YEAH");
+                return View("Upload");
                 ViewBag.Subject = ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
                 ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
                 //myFile = filMyFile.PostedFile;
                 //string strFilename = Path.GetFileName(myFile.FileName);
                 Debug.WriteLine("file: " + ClaimsPrincipal.Current.FindFirst(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value));
-                return View("Upload")
                 try{
                     CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["ConnectionAzure"].ConnectionString);
                 }
