@@ -65,7 +65,6 @@ namespace WebApp.Controllers
         public async Task<ActionResult> Upload()
         {
             ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
-            Trace.WriteLine("first log OEOEOEOEOEOEOEOEOEOOEOEEOEOEOOEOEOEOEOEOEOEOO");
             //ATTEMPT TO GET USER'S PROFILE PICTURE, FIX LATER:
 
             //var servicePoint = new Uri("https://graph.windows.net");
@@ -414,8 +413,6 @@ namespace WebApp.Controllers
             string timestamp = System.DateTime.Now.ToString(new CultureInfo("en-US"));
             Guid g = Guid.NewGuid();
             string myfilestr = Request.Form["file"];
-            Trace.WriteLine("first log");
-
             var myFile = Request.Files["file"];
             
 
