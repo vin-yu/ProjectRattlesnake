@@ -403,7 +403,7 @@ namespace WebApp.Controllers
 
 
         }
-        [HttpPost]
+        
         [Authorize]
         public async Task<ActionResult> UploadFile()
         {
