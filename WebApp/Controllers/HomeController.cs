@@ -410,6 +410,7 @@ namespace WebApp.Controllers
             //HtmlInputFile filMyFile
 
             //UploadThis();
+            return View("Upload");
             string timestamp = System.DateTime.Now.ToString(new CultureInfo("en-US"));
             Guid g = Guid.NewGuid();
             string myfilestr = Request.Form["file"];
@@ -427,7 +428,13 @@ namespace WebApp.Controllers
                 //myFile = filMyFile.PostedFile;
                 //string strFilename = Path.GetFileName(myFile.FileName);
                 Debug.WriteLine("file: " + ClaimsPrincipal.Current.FindFirst(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value));
-                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["ConnectionAzure"].ConnectionString);
+                try{
+                    CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["ConnectionAzure"].ConnectionString);
+                }
+                catch
+                {
+                    return View("Upload");
+                }
                 //CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
                 // Create the blob client.
                 CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
