@@ -40,6 +40,11 @@
         <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
         <!-- Custom Theme Style -->
         <link href="../build/css/custom.min.css" rel="stylesheet">
+
+     <script src="~/Scripts/Audio/js/audiodisplay.js" language="javascript" type="text/javascript"></script>
+     <script src="~/Scripts/Audio/js/recorderjs/recorder.js"></script>
+     <script src="~/Scripts/Audio/js/main.js"></script>
+
     </head>
     <body class="nav-md"  style="background:#e5edf9">
         <div class="container body">
@@ -94,7 +99,7 @@
 
                             <a style="width:inherit;background:#071033;" href="@Url.Action("Settings", "Home")">
                                 <div class="col-md-5" style="margin-bottom:20px; margin-left: 15px;">
-                                    <img src="~/Content/Dashboard/img.jpg" alt="Your profile picture." style="border-radius:50%; width:90%; margin-left:5px; margin-right:0px; margin-top:-5px">
+                                    <img src="~/Content/Dashboard/user-photo.jpg" alt="Your profile picture." style="border-radius:50%; width:90%; margin-left:5px; margin-right:0px; margin-top:-5px">
                                 </div>
                                 <br />
                                 <div class="col-md-5" style="margin-top:-10px">
@@ -118,7 +123,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="">
                                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        <img src="images/img.jpg" alt="">John Doe
+                                        <img src="~/Content/Dashboard/user-photo.jpg" alt="">John Doe
                                         <span class=" fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -194,16 +199,11 @@
                         </nav>
                     </div>
                 </div>
-                <!-- /top navigation -->
-                
-                @*</head>
-                    <body>*@
+
+
                 @RenderBody()
                 @RenderSection("scripts", required: false)
-                @*</body>*@
 
-                <!-- footer content -->
-                <!-- /footer content -->
             </div>
         </div>
         <!-- jQuery -->

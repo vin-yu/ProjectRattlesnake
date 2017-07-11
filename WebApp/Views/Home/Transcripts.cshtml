@@ -1,108 +1,81 @@
 ﻿@{
     ViewBag.website = "Dashboard";
 }
-
-<body style="background:#e5edf9">
-    <div class="nav-md">
-        <div class="container body">
-            <div class="main_container">
-                <div class="col-md-3 left_col collapse navbar-collapse" id="myNavbar" style="background:#071033;">
-                    <div class="left_col scroll-view" style="background:#071033;">
-                        <center>
-                            <div class="row" style="background:transparent; width:100%">
-                                <a href="index.html">
-                                    <img src="~/Content/Dashboard/light_logo_text.png" style="width:90%; margin-top:10px;margin-bottom:10px;">
-                                </a>
-                            </div>
-                        </center>
-                        <br />
-
-
-                        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-                            <div class="menu_section">
-                                <ul class="nav side-menu">
-                                    <li style="text-transform:uppercase">
-                                        <a href="@Url.Action("Welcome", "Home")"><i class="fa fa-home"></i> Home </a>
-                                    </li>
-                                    <li style="text-transform:uppercase">
-                                        <a href="@Url.Action("Upload", "Home")"><i class="fa fa-upload"></i> Upload a Recording</a>
-                                    </li>
-                                    <li style="text-transform:uppercase">
-                                        <a href="@Url.Action("Record", "Home")"><i class="fa fa-video-camera"></i> Record a Meeting </a>
-                                    </li>
-                                    <li style="text-transform:uppercase">
-                                        <a href="@Url.Action("Transcripts", "Home")"><i class="fa fa-file"></i> My Transcripts </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="sidebar-footer hidden-small"  style="background:#071033;">
-                            <div class="col-md-5" style="margin-bottom:20px">
-                                <img src="~/Content/Dashboard/img.jpg" alt="Your profile picture." style="border-radius:50%; width:90%; margin-left:5px; margin-right:5px; margin-top:-5px">
-                            </div>
-                            <div class="col-md-5" style="margin-bottom:-20px">
-                                <p style="text-transform:uppercase; color:#fff; font-size:12px; margin:0px">Firstname Lastname</p>
-                                <p style="text-transform:uppercase; color:#8db3ff; font-size:8px; margin:0px">Role</p>
-                                <p style="text-transform:uppercase; color:#8db3ff; font-size:8px; margin:0px">Organization</p>
-                            </div>
-                                <a style="width:inherit ;" href="@Url.Action("Settings", "Home")">
-                                    <span class="glyphicon glyphicon-cog" aria-hidden="true" style="display:inline-block; margin-left:-10px;"> <p style="display:inline-block;text-transform:uppercase; margin-left:0px; font-family: sans-serif; font-size:13px">Account Settings</p></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="top_nav" style="background:#fff;">
-                        <div class="nav_menu" style="background:#fff;">
-                            <nav>
-                                <div class="nav toggle">
-                                    <a id="menu_toggle"><i class="fa fa-bars" style="color:#071033"></i></a>
-                                </div>
-                                <ul class="nav navbar-nav navbar-right">
-                                    <li class="">
-                                        <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            <img src="~/Content/Dashboard/img.jpg" alt="">John Doe
-                                            <span class=" fa fa-angle-down"></span>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                            <li><a href="javascript:;">Profile</a></li>
-                                            <li><a href="javascript:;">Help</a></li>
-                                            <li><a href="@Url.Action("SignOut", "Account")"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                                        </ul>
-                                    </li>
-                                    <li role="presentation" class="dropdown">
-                                        <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa fa-bell" style="color:#071033"></i>
-                                            <span class="badge" style="background:#E8284D">6</span>
-                                        </a>
-                                        <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                                            <li>
-                                                <ul class="nav navbar-right panel_toolbox">
-                                                    <li>
-                                                        <a class="close-link"><i class="fa fa-close"></i></a>
-                                                    </li>
-                                                </ul>
-                                                <a>
-                                                        <span>John Smith</span>
-                                                        <span class="time">3 mins ago</span>
-                                                    </span>
-                                                    <span class="message">
-                                                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- page content -->
-                <div class="right_col" role="main" style="background:#e5edf9;">
-                    @Html.Partial("_TranscriptsPartial")
+            <!-- page content -->
+<div class="right_col" role="main" style="background:#e5edf9; height:90%;">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>My Transcripts</h3>
+        </div>
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                    </span>
                 </div>
             </div>
-        </body>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        @{
+            for (var i = 0; i < ViewBag.results.Count; i++)
+            {
+                var meeting = ViewBag.results[i].Item1;
+                var recording = ViewBag.results[i].Item2;
+                var transcript = ViewBag.results[i].Item3;
+                var heading = "heading" + i;
+                var collapse = "collapse" + i;
+                var collapse2 = "#collapse" + i;
+                var meetingTabName = "meeting" + i;
+                var meetingTabName2 = "#meeting" + i;
+                var recordingTabName = "recording" + i;
+                var recordingTabName2 = "#recording" + i;
+                var transcriptTabName = "transcript" + i;
+                var transcriptTabName2 = "#transcript" + i;
+
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id=@heading>
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href=@collapse2>
+                                    @meeting
+                                </a>
+                            </h4>
+                        </div>
+                        <div id=@collapse class="panel-collapse collapse" role="tabpanel" aria-labelledby=@heading>
+                            <div class="panel-body">
+                                <div>
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active"><a href=@meetingTabName2 role="tab" data-toggle="tab">Meeting Information</a></li>
+                                        <li role="presentation"><a href=@recordingTabName2 role="tab" data-toggle="tab">Recording</a></li>
+                                        <li role="presentation"><a href=@transcriptTabName2 role="tab" data-toggle="tab">Transcript</a></li>
+                                    </ul>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane active" id=@meetingTabName>@meeting</div>
+                                        <div role="tabpanel" class="tab-pane" id=@recordingTabName>
+                                            @{
+                                                foreach (var line in recording)
+                                                {
+                                                    <p>@line</p>
+                                                }
+                                            }
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id=@transcriptTabName>@transcript</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                                    }
+                                                }
+        }
+
+
+    </div>
+<!-- /page content -->
