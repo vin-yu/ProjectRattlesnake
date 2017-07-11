@@ -447,7 +447,7 @@ namespace WebApp.Controllers
                 // Create or overwrite the "myblob" blob with contents from a local file.
                 using (var fileStream = System.IO.File.OpenRead(@myfilestr))
                 {
-                    //blockBlob.UploadFromStream(fileStream);
+                    blockBlob.UploadFromStream(fileStream);
                 }
                 
             }
