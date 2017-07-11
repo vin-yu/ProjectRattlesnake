@@ -443,12 +443,17 @@ namespace WebApp.Controllers
 
 
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + g.ToString() + Path.GetFileName(myfilestr));
-                myfilestr = System.Web.HttpContext.Current.Request.MapPath("~\\" + Path.GetFileName(myfilestr));
+                using (myFile.InputStream)
+                {
+                    blockBlob.UploadFromStream(myFile.InputStream);
+                }
                 // Create or overwrite the "myblob" blob with contents from a local file.
+                /*
                 using (var fileStream = System.IO.File.OpenRead(@myfilestr))
                 {
                     blockBlob.UploadFromStream(fileStream);
                 }
+                */
                 
             }
 
