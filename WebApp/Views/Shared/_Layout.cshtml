@@ -4,21 +4,224 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no" />
-    <title>Project Rattlesnake - My ASP.NET Application</title>
+    <title>Project Rattlesnake - My ASP.NET Application</title>*@
 
-    @if(ViewBag.website == "Index")
-    {
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/jquery")
-    }
-    @if(ViewBag.website == "Dashboard")
-    {
-        @Styles.Render("~/Content/Dashboard/css")
-        @Scripts.Render("~/bundles/Dashboard/jquery")
-    }
-</head>
-<body>*@
+@if (ViewBag.website == "Index")
+{
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
     @RenderBody()
     @RenderSection("scripts", required: false)
-@*</body>*@
+}
+@if (ViewBag.website == "Dashboard")
+{
+    @*@Styles.Render("~/Content/Dashboard/css")
+        @Scripts.Render("~/bundles/Dashboard/jquery")*@
+{<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Gentelella Alela! | </title>
+        <!-- Bootstrap -->
+        <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- NProgress -->
+        <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+        <!-- iCheck -->
+        <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+        <!-- bootstrap-progressbar -->
+        <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+        <!-- PNotify -->
+        <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+        <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+        <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+        <!-- Custom Theme Style -->
+        <link href="../build/css/custom.min.css" rel="stylesheet">
+    </head>
+    <body class="nav-md"  style="background:#e5edf9">
+        <div class="container body">
+            <div class="main_container">
+                <div class="col-md-3 left_col" style="background:#071033;">
+                    <div class="left_col scroll-view" style="background:#071033;">
+                        <div class="navbar nav_title" style="border: 0; background:#071033;">
+                            <center>
+                                <a href="index.html" class="site_title" style="font-family:'Advent Pro', 'Arial','Franklin Gothic Light', 'Arial Narrow', sans-serif;font-size:15pt">
+                                    <img src="~/Content/Dashboard/light_logo.png" <img src="~/Content/Dashboard/light_logo_text.png" style="height:70%; margin-top:10px;margin-bottom:10px;margin-left:-10px;">
+                                    <span>  Project Rattlesnake</span>
+                                </a>
+                            </center>
+                        </div>
+                        <div class="clearfix"></div>
+                         @*menu profile quick info 
+                        <div class="profile clearfix">
+                            <div class="profile_pic">
+                                <img src=""~/Content/Dashboard/light_logo.png" alt="..." class="img-circle profile_img">
+                            </div>
+                            <div class="profile_info">
+                                <span>Welcome,</span>
+                                <h2>John Doe</h2>
+                            </div>
+                        </div>*@
+                        <!-- /menu profile quick info -->
+                        <br />
+                        <!-- sidebar menu -->
+                        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                            <div class="menu_section">
+
+                                <ul class="nav side-menu">
+                                    <li style="text-transform:uppercase">
+                                        <a href="@Url.Action("Welcome", "Home")"><i class="fa fa-home"></i> Home </a>
+                                    </li>
+                                    <li style="text-transform:uppercase">
+                                        <a href="@Url.Action("Upload", "Home")"><i class="fa fa-upload"></i> Upload a Recording</a>
+                                    </li>
+                                    <li style="text-transform:uppercase">
+                                        <a href="@Url.Action("Record", "Home")"><i class="fa fa-video-camera"></i> Record a Meeting </a>
+                                    </li>
+                                    <li style="text-transform:uppercase">
+                                        <a href="@Url.Action("Transcripts", "Home")"><i class="fa fa-file"></i> My Meetings </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /sidebar menu -->
+                        <!-- /menu footer buttons -->
+                        <div class="sidebar-footer hidden-small" style="background:#071033;">
+                            
+
+                            <a style="width:inherit;background:#071033;" href="@Url.Action("Settings", "Home")">
+                                <div class="col-md-5" style="margin-bottom:20px; margin-left: 15px;">
+                                    <img src="~/Content/Dashboard/img.jpg" alt="Your profile picture." style="border-radius:50%; width:90%; margin-left:5px; margin-right:0px; margin-top:-5px">
+                                </div>
+                                <br />
+                                <div class="col-md-5" style="margin-top:-10px">
+                                    <p style="text-transform:uppercase; color:#fff; font-size:12px; margin:0px">@ViewBag.Name</p>
+                                </div>
+                                <br />
+                                <br />
+                                <span class="glyphicon glyphicon-cog" aria-hidden="true" style="display:inline-block; margin-left:-10px;"> <p style="display:inline-block;text-transform:uppercase; margin-left:0px; font-family: sans-serif; font-size:13px">Account Settings</p></span>
+                            </a>
+                        </div>
+                        <!-- /menu footer buttons -->
+                    </div>
+                </div>
+                <!-- top navigation -->
+                <div class="top_nav" style="background:#fff;">
+                    <div class="nav_menu" style="background:#fff;">
+                        <nav>
+                            <div class="nav toggle">
+                                <a id="menu_toggle"><i class="fa fa-bars" style="color:#071033"></i></a>
+                            </div>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="">
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <img src="images/img.jpg" alt="">John Doe
+                                        <span class=" fa fa-angle-down"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                        <li><a href="javascript:;">Settings</a></li>
+                                        <li><a href="@Url.Action("SignOut", "Account")"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    </ul>
+                                </li>
+                                <li role="presentation" class="dropdown">
+                                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-bell" style="color:#071033"></i>
+                                        <span class="badge" style="background:#E8284D">6</span>
+                                    </a>
+                                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                        <li>
+                                            <a>
+                                                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                                <span>
+                                                    <span>John Smith</span>
+                                                    <span class="time">3 mins ago</span>
+                                                </span>
+                                                <span class="message">
+                                                    Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a>
+                                                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                                <span>
+                                                    <span>John Smith</span>
+                                                    <span class="time">3 mins ago</span>
+                                                </span>
+                                                <span class="message">
+                                                    Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a>
+                                                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                                <span>
+                                                    <span>John Smith</span>
+                                                    <span class="time">3 mins ago</span>
+                                                </span>
+                                                <span class="message">
+                                                    Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a>
+                                                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                                <span>
+                                                    <span>John Smith</span>
+                                                    <span class="time">3 mins ago</span>
+                                                </span>
+                                                <span class="message">
+                                                    Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div class="text-center">
+                                                <a>
+                                                    <strong>See All Alerts</strong>
+                                                    <i class="fa fa-angle-right"></i>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!-- /top navigation -->
+                
+                @*</head>
+                    <body>*@
+                @RenderBody()
+                @RenderSection("scripts", required: false)
+                @*</body>*@
+
+                <!-- footer content -->
+                <!-- /footer content -->
+            </div>
+        </div>
+        <!-- jQuery -->
+        <script src="../vendors/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- FastClick -->
+        <script src="../vendors/fastclick/lib/fastclick.js"></script>
+        <!-- NProgress -->
+        <script src="../vendors/nprogress/nprogress.js"></script>
+        <!-- bootstrap-progressbar -->
+        <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+        <!-- iCheck -->
+        <script src="../vendors/iCheck/icheck.min.js"></script>
+        <!-- PNotify -->
+        <!-- Custom Theme Scripts -->
+        <script src="../build/js/custom.min.js"></script>
+
+    </body>}
+}
 </html>
