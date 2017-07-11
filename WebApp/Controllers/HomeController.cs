@@ -247,10 +247,10 @@ namespace WebApp.Controllers
             {
                 ViewBag.Subject = ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
                 ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
-
+                CloudStorageAccount storageAccount;
                 try
                 {
-                    CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["ConnectionAzure"].ConnectionString);
+                    storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["ConnectionAzure"].ConnectionString);
                     //CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
                 }
                 catch
