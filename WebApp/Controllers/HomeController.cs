@@ -1,14 +1,19 @@
 ﻿using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Protocols;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using WebApp_OpenIDConnect_DotNet.Models;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OpenIdConnect;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Web.UI.WebControls;
@@ -18,8 +23,14 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls.WebParts;
 
 using System.Xml.Linq;
+using System;
+using System.Text;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -35,9 +46,24 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.ServiceModel.Channels;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Azure;
-
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Auth;
+using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.WindowsAzure.Storage.RetryPolicies;
 using Microsoft.WindowsAzure.Storage.Shared.Protocol;
+
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Auth;
+using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.WindowsAzure.Storage.RetryPolicies;
+using System.Web.UI.HtmlControls;
 
 
 
@@ -65,6 +91,30 @@ namespace WebApp.Controllers
         public async Task<ActionResult> Upload()
         {
             ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
+
+            //ATTEMPT TO GET USER'S PROFILE PICTURE, FIX LATER:
+
+            //var servicePoint = new Uri("https://graph.windows.net");
+            //var serviceRoot = new Uri(servicePoint, "<your tenant>"); //e.g. xxx.onmicrosoft.com
+            //const string clientId = "<clientId>";
+            //const string secretKey = "<secretKey>";// ClientID and SecretKey are defined when you register application with Azure AD
+            //var authContext = new AuthenticationContext("https://login.windows.net/<tenant>/oauth2/token");
+            //var credential = new ClientCredential(clientId, secretKey);
+            //ActiveDirectoryClient directoryClient = new ActiveDirectoryClient(serviceRoot, async () =>
+            //{
+            //    var result = await authContext.AcquireTokenAsync("https://graph.windows.net/", credential);
+            //    return result.AccessToken;
+            //});
+
+            //var user = await directoryClient.Users.Where(x => x.UserPrincipalName == "<username>").ExecuteSingleAsync();
+            //DataServiceStreamResponse photo = await user.ThumbnailPhoto.DownloadAsync();
+            //using (MemoryStream s = new MemoryStream())
+            //{
+            //    photo.Stream.CopyTo(s);
+            //    var encodedImage = Convert.ToBase64String(s.ToArray());
+            //}
+
+
             return View();
         }
 
@@ -81,7 +131,95 @@ namespace WebApp.Controllers
             ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
             return View();
         }
-        
+
+        [Authorize]
+        //public async Task<ActionResult> Transcripts()
+        //{
+
+        //    //TODO: Search through transcripts:
+        //    //https://docs.microsoft.com/en-us/azure/search/search-howto-indexing-azure-blob-storage
+
+
+        //    ActionResult results = GetUserFiles();
+        //    Debug.WriteLine(results);
+
+
+
+
+        //    //ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
+
+
+
+        //    // Retrieve storage account from connection string.
+        //    CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+        //        CloudConfigurationManager.GetSetting("StorageConnectionString"));
+
+        //    // Create the blob client.
+        //    CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+
+        //    // Retrieve reference to a previously created container.
+        //    CloudBlobContainer container = blobClient.GetContainerReference("container");
+
+        //    CloudBlobDirectory dira = container.GetDirectoryReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value);
+
+
+        ////    ViewBag.results = new Tuple<HtmlAudio, String, String>[] {
+        ////        Tuple.Create("Meeting 1", "Recording 1", "Transcript1"),
+        ////        foreach (IListBlobItem item in dira.ListBlobs())
+        ////    {
+        ////        Debug.WriteLine(dira.ListBlobs());
+        ////        if (item.GetType() == typeof(CloudBlobDirectory))
+        ////        {
+        ////            Debug.WriteLine("WOW  " + item.Uri.ToString());
+        ////            foreach (IListBlobItem file in item.ListBlobs())
+        ////            {
+        ////                Tuple.Create(file.Uri.ToString., blob.DownloadText(););
+        ////            }
+        ////    }
+        ////};
+
+        //    return View();
+        //        } 
+        //public void TranscriptPrint(CloudBlockBlob item)
+        //{
+        //    CloudBlockBlob blob = (CloudBlockBlob)item;
+        //    string myfilestr = System.IO.Path.GetFileName(blob.Uri.LocalPath);
+        //    Debug.WriteLine(myfilestr);
+
+        //    string extension = Path.GetExtension(myfilestr);
+        //    Debug.WriteLine(extension);
+        //    if (extension == ".txt")
+        //    {
+
+        //        //CloudBlob blob = container.GetBlobReference(item.ToString());
+        //        using (var stream = blob.OpenRead())
+        //        {
+        //            using (StreamReader reader = new StreamReader(stream))
+        //            {
+
+        //                Debug.WriteLine(reader.ReadToEnd());
+
+        //            }
+        //        }
+        //    }
+        //}
+        //public void SearchDirectories(CloudBlobDirectory dira)
+        //{
+        //    foreach (IListBlobItem item in dira.ListBlobs())
+        //    {
+        //        Debug.WriteLine(dira.ListBlobs());
+        //        if (item.GetType() == typeof(CloudBlobDirectory))
+        //        {
+        //            Debug.WriteLine("WOW  " + item.Uri.ToString());
+        //            SearchDirectories((CloudBlobDirectory)item);
+        //        }
+        //        else
+        //        {
+        //            TranscriptPrint((CloudBlockBlob)item);
+        //        }
+
+        //    }
+        //}
         [Authorize]
         public async Task<ActionResult> Transcripts()
         {
@@ -89,7 +227,61 @@ namespace WebApp.Controllers
             //TODO: Search through transcripts:
             //https://docs.microsoft.com/en-us/azure/search/search-howto-indexing-azure-blob-storage
 
+
             ActionResult results = GetUserFiles();
+            Debug.WriteLine(results);
+
+
+
+
+            ////ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
+
+
+
+            //// Retrieve storage account from connection string.
+            //CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+            //    CloudConfigurationManager.GetSetting("StorageConnectionString"));
+
+            //// Create the blob client.
+            //CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+
+            //// Retrieve reference to a previously created container.
+            //CloudBlobContainer container = blobClient.GetContainerReference("container");
+
+            //CloudBlobDirectory dira = container.GetDirectoryReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value);
+
+            //    Debug.WriteLine(dira.ListBlobs());
+            //    if (item.GetType() == typeof(CloudBlobDirectory))
+            //    {
+            //        Debug.WriteLine("WOW  " + item.Uri.ToString());
+            //        foreach (IListBlobItem file in item.ListBlobs())
+            //        {
+            //        string myfilestr = System.IO.Path.GetFileName(blob.Uri.LocalPath);
+            //        string extension = Path.GetExtension(myfilestr);
+            //        Debug.WriteLine(extension);
+            //        if (extension == ".txt")
+            //        {
+
+            //            //CloudBlob blob = container.GetBlobReference(item.ToString());
+            //            using (var stream = blob.OpenRead())
+            //            {
+            //                using (StreamReader reader = new StreamReader(stream))
+            //                {
+
+            //                    Debug.WriteLine(reader.ReadToEnd());
+
+            //                }
+            //            }
+            //        }
+            //        }
+            //    }
+
+            ////    ViewBag.results = new Tuple<HtmlAudio, String, String>[] {
+            ////        Tuple.Create("Meeting 1", "Recording 1", "Transcript1"),
+            ////        foreach (IListBlobItem item in dira.ListBlobs())
+
+            //    //};
+
             return View();
         }
 
@@ -99,15 +291,15 @@ namespace WebApp.Controllers
             string audio_filename = "";
             string transcription_filename = "";
             string analysis_filename = "";
-            ViewBag.results = new List<Tuple<String, string[], String>>();
+            ViewBag.results = new List<Tuple<String, String, String>>();
             try
             {
                 Debug.WriteLine("Connect to SQL Server and demo Create, Read, Update and Delete operations.");
                 // Build connection string
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "projectrattlensake.database.windows.net";  
-                builder.UserID = "PRadmin@projectrattlensake";              
-                builder.Password = "Passw0rd!";      
+                builder.DataSource = "projectrattlensake.database.windows.net";   // update me
+                builder.UserID = "PRadmin@projectrattlensake";              // update me
+                builder.Password = "Passw0rd!";      // update me
                 builder.InitialCatalog = "ProjectRattlesnakeDB";
 
                 Debug.Write("Connecting to SQL Server ... ");
@@ -115,7 +307,9 @@ namespace WebApp.Controllers
                 {
                     connection.Open();
                     Debug.WriteLine("Done.");
-                    
+
+                    // Create a sample database
+                    string DatabaseName = "ProjectRattlesnakeDB";
                     string sqlcommand = "";
                     StringBuilder sql = new StringBuilder();
                     sql.Append("USE ProjectRattlesnakeDB; ");
@@ -179,15 +373,12 @@ namespace WebApp.Controllers
                                             {
 
                                                 transcription_file+=line;
-                                                transcription_file +="\n";
+                                                transcription_file +="//n";
                                             }
                                         }
                                     }
                                 }
-                                var lines = transcription_file.Split('\n');
-                                Debug.WriteLine(lines);
-                                string[] transcription_file_lines = lines;
-                                Debug.WriteLine(transcription_file_lines);
+
                                 if (analysis_filename != "NULL")
                                 {
                                     CloudBlockBlob blob = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + analysis_filename);
@@ -202,7 +393,7 @@ namespace WebApp.Controllers
                                     }
                                 }
                                 ViewBag.results.Add(
-                                    Tuple.Create(audio_file, transcription_file_lines, analysis_file)
+                                    Tuple.Create(audio_file, transcription_file, analysis_file)
                                 );
 
                             }
@@ -226,37 +417,45 @@ namespace WebApp.Controllers
                 Debug.WriteLine(e.ToString());
             }
 
+
+
+
+            Debug.WriteLine("All done. Press any key to finish...");
+
             return View("Upload");
 
+
         }
-        
+
         [Authorize]
         public async Task<ActionResult> UploadFile()
         {
             // Retrieve storage account from connection string.
+            //HtmlInputFile filMyFile
+
+            //UploadThis();
             string timestamp = System.DateTime.Now.ToString(new CultureInfo("en-US"));
             Guid g = Guid.NewGuid();
+            string myfilestr = Request.Form["file"];
+            
+
             var myFile = Request.Files["file"];
             
 
-            string myfilestr = myFile.FileName;
+            myfilestr = myFile.FileName;
+
 
             string extension = Path.GetExtension(myfilestr);
-            
             if (extension == ".mp3" || extension == ".mp4" || extension == ".wav")
             {
+                Debug.WriteLine("YEAH");
                 ViewBag.Subject = ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
                 ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
-                CloudStorageAccount storageAccount;
-                try
-                {
-                    storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["ConnectionAzure"].ConnectionString);
-                    //CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
-                }
-                catch
-                {
-                    return View("Upload"); // connection to blob store failed.
-                }
+                //myFile = filMyFile.PostedFile;
+                //string strFilename = Path.GetFileName(myFile.FileName);
+                Debug.WriteLine("file: " + ClaimsPrincipal.Current.FindFirst(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value));
+                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+                    CloudConfigurationManager.GetSetting("StorageConnectionString"));
 
                 // Create the blob client.
                 CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
@@ -265,24 +464,19 @@ namespace WebApp.Controllers
                 CloudBlobContainer container = blobClient.GetContainerReference("container");
 
                 // Retrieve reference to a blob named "myblob".
+                
+                Debug.WriteLine("file: " + g.ToString()+ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + timestamp + "/" + Path.GetFileName(myfilestr));
+
+
+
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + g.ToString() + Path.GetFileName(myfilestr));
 
-                // Upload Blob
-                try
+
+                // Create or overwrite the "myblob" blob with contents from a local file.
+                using (var fileStream = System.IO.File.OpenRead(@myfilestr))
                 {
-                    using (myFile.InputStream)
-                    {
-                        blockBlob.UploadFromStream(myFile.InputStream);
-                    }
+                    blockBlob.UploadFromStream(fileStream);
                 }
-                catch
-                {
-                    return View("Upload"); // failed to upload blob
-                }
-            }
-            else
-            {
-                return View("Upload"); // incorrect format
             }
 
             try
@@ -312,7 +506,9 @@ namespace WebApp.Controllers
                     sql.Append("([FileGuid],[UserName], [UserID], [Upload_Time], [Audio_File], [Transcription_Status],[Transcription_File],[Analysis_Status],[Analysis_File])");
                     sql.Append("VALUES");
                     sql.Append("('"+g.ToString()+"','" + (ClaimsPrincipal.Current.FindFirst("name").Value).ToString() + "', '"+ (ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value).ToString() + "','"+timestamp+"','"+ g.ToString()+Path.GetFileName(myfilestr) + "', 0,NULL, 0, NULL);");
+
                     
+
                     sqlcommand = sql.ToString();
 
                     Debug.WriteLine(sqlcommand);
@@ -321,18 +517,163 @@ namespace WebApp.Controllers
                         command.ExecuteNonQuery();
                         Debug.WriteLine("Done.");
                     }
+
+
                 }
+
+
             }
             catch (SqlException e)
             {
                 Debug.WriteLine(e.ToString());
             }
-            
+
+            Debug.WriteLine("All done. Press any key to finish...");
 
             return View("Upload");
         }
-        
-        
+
+    public ActionResult UploadRecording()
+    {
+        string timestamp = System.DateTime.Now.ToString(new CultureInfo("en-US"));
+        Guid g = Guid.NewGuid();
+
+        using (var stream = Request.InputStream)
+        {
+            int length = Convert.ToInt32(stream.Length);
+            byte[] buffer = new byte[length];
+
+            stream.Read(buffer, 0, length);
+            
+            //while ((byteNumber = stream.Read(buffer, 0, buffer.Length)) > 0)
+            //{
+            //    //stream.Write(buffer, 0, byteNumber);
+            //}
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+            CloudConfigurationManager.GetSetting("StorageConnectionString"));
+
+            // Create the blob client.
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+            // Retrieve reference to a previously created container.
+            CloudBlobContainer container = blobClient.GetContainerReference("container");
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(g+".wav");
+
+            // blockBlob.UploadFromStream(stream);
+            blockBlob.UploadFromByteArray(buffer, 0, length);
+
+        }
+
+            // string xml = Encoding.UTF8.GetString(buffer);
+
+            // System.Console.WriteLine(bytes);
+            // CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+            //CloudConfigurationManager.GetSetting("StorageConnectionString"));
+
+            // // Create the blob client.
+            // CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+            // // Retrieve reference to a previously created container.
+            // CloudBlobContainer container = blobClient.GetContainerReference("container");
+            // CloudBlockBlob blockBlob = container.GetBlockBlobReference(g+ "output");
+            // blockBlob.UploadFromByteArray(result, 0, byteNumber);
+
+
+            return View("Record");
+    }
+        //[Authorize]
+        //public ActionResult GetUserFiles()
+        //{
+        //    try
+        //    {
+        //        Debug.WriteLine("Connect to SQL Server and demo Create, Read, Update and Delete operations.");
+        //        // Build connection string
+        //        SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+        //        builder.DataSource = "projectrattlensake.database.windows.net";   // update me
+        //        builder.UserID = "PRadmin@projectrattlensake";              // update me
+        //        builder.Password = "Passw0rd!";      // update me
+        //        builder.InitialCatalog = "ProjectRattlesnakeDB";
+
+        //        Debug.Write("Connecting to SQL Server ... ");
+        //        using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+        //        {
+        //            connection.Open();
+        //            Debug.WriteLine("Done.");
+
+        //            // Create a sample database
+        //            string DatabaseName = "ProjectRattlesnakeDB";
+        //            string sqlcommand = "";
+        //            StringBuilder sql = new StringBuilder();
+        //            sql.Append("USE ProjectRattlesnakeDB; ");
+        //            sql.Append("SELECT Audio_File, Transcription_File, Analysis_File FROM RattleSnakeTable WHERE UserID = " + (ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value).ToString() + ";");
+
+        //            sqlcommand = sql.ToString();
+
+        //            Debug.WriteLine(sqlcommand);
+        //            using (SqlCommand command = new SqlCommand(sqlcommand, connection))
+        //            {
+        //                SqlDataReader reader = command.ExecuteReader();
+        //                if (reader.HasRows)
+        //                {
+        //                    while (reader.Read())
+        //                    {
+        //                        Console.WriteLine("{0}\t{1}", reader.GetInt32(0),
+        //                            reader.GetString(1));
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    Console.WriteLine("No rows found.");
+        //                }
+
+        //                reader.Close();
+
+        //                Debug.WriteLine("Done.");
+        //            }
+
+        //            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+        //            CloudConfigurationManager.GetSetting("StorageConnectionString"));
+
+        //            // Create the blob client.
+        //            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+
+        //            // Retrieve reference to a previously created container.
+        //            CloudBlobContainer container = blobClient.GetContainerReference("container");
+
+        //            // Retrieve reference to a blob named "myblob".
+
+        //            //CloudBlockBlob blockBlob = container.GetBlockBlobReference(ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value + "/" + Path.GetFileName(myfilestr));
+
+
+
+
+        //        }
+        //    }
+        //    catch (SqlException e)
+        //    {
+        //        Debug.WriteLine(e.ToString());
+        //    }
+
+        //    Debug.WriteLine("All done. Press any key to finish...");
+
+        //    return View("Upload");
+
+
+        //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         /// <summary>
         /// Contains public method for validating the storage connection string.
