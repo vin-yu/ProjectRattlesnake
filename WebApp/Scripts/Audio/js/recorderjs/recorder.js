@@ -1,4 +1,4 @@
-/*License (MIT)
+ /*License (MIT)
 
 Copyright Â© 2013 Matt Diamond
 
@@ -18,7 +18,7 @@ DEALINGS IN THE SOFTWARE.
 */
 
 (function(window){
-
+  
   var WORKER_PATH = '../Scripts/Audio/js/recorderjs/recorderWorker.js';
 
   var Recorder = function(source, cfg){
@@ -80,6 +80,13 @@ DEALINGS IN THE SOFTWARE.
     this.exportWAV = function(cb, type){
       currCallback = cb || config.callback;
       type = type || config.type || 'audio/wav';
+      //var xhr = new XMLHttpRequest();
+      //xhr.open("POST", 'Home/UploadRecording', true);
+      //xhr.setRequestHeader("content-type", "audio/wav");
+      //xhr.onload = function (e) {
+      //    // Handle the response.
+      //}
+      //xhr.send(currCallback);
       if (!currCallback) throw new Error('Callback not set');
       worker.postMessage({
         command: 'exportWAV',
@@ -106,13 +113,26 @@ DEALINGS IN THE SOFTWARE.
     this.node.connect(this.context.destination);   // if the script node is not connected to an output the "onaudioprocess" event is not triggered in chrome.
   };
 
-  Recorder.setupDownload = function(blob, filename){
+  Recorder.setupDownload = function (blob, filename) {
     var url = (window.URL || window.webkitURL).createObjectURL(blob);
     var link = document.getElementById("save");
     link.href = url;
+    
     link.download = filename || 'output.wav';
-  }
 
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '/Home/UploadRecording', true);
+    xhr.setRequestHeader("content-type", "audio/wav");
+    //xhr.responseType = "blob";
+    xhr.send(blob);
+
+    xhr.onload = function (e) {
+        alert("haha");
+    }
+    
+
+  }
+  
   window.Recorder = Recorder;
 
 })(window);
